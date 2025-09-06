@@ -18,3 +18,5 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'api.settings')
 
 static = BASE_DIR / 'static'
 application = WhiteNoise(get_wsgi_application(), root=static, prefix='static/')
+
+app = application
