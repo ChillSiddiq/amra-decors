@@ -33,12 +33,12 @@
         <!-- Offcanvas Menu Begin -->
         <div class="offcanvas-menu-overlay"></div>
         <div class="offcanvas-menu-wrapper">
-            <div class="offcanvas__logo" style="width: 75%; float: left">
+            <div class="offcanvas__logo">
                 <a href="{% url 'home' %}"><img src="{% static 'img/logo.png' %}" alt=""/></a>
             </div>
-            <div class="offcanvas__search__option" style="padding-top: 10px">
+            <!-- <div class="offcanvas__search__option" style="padding-top: 10px">
                 <img class="search-switch" src="{% static 'img/icon/search.png' %}" alt="" />
-            </div>
+            </div> -->
             <nav class="header__mobile__menu">
                 <ul>
                     <li class="{% if page_name == 'home' %}active{% endif %}"><a href="{% url 'home' %}">Home</a></li>
@@ -52,11 +52,11 @@
         <!-- Offcanvas Menu End -->
 
         <!-- Header Section Begin -->
-        <header class="header">
+        <header class="header" style="background: black;">
             <div class="container">
                 <div class="row">
                     <!-- Logo -->
-                    <div class="col-lg-2">
+                    <div class="col-lg-4">
                         <div class="header__logo">
                             <a href="{% url 'home' %}">
                                 <img src="{% static 'img/logo.png' %}" alt="Logo" />
@@ -65,7 +65,7 @@
                     </div>
 
                     <!-- Navigation & Options -->
-                    <div class="col-lg-10">
+                    <div class="col-lg-8">
                         <div class="header__options">
                             <!-- Navigation Menu -->
                             <nav class="header__menu mobile-menu">
@@ -131,7 +131,7 @@
         <!-- Instagram End -->
 
         <!-- Footer Section Begin -->
-        <footer class="footer hide-on-mobile">
+        <footer class="footer hide-on-mobile" style="background: black;">
             <div class="container">
                 <div class="footer__top">
                     <div class="row align-items-center">
@@ -145,7 +145,7 @@
                                 <p>
                                 Copyright &copy;
                                 <script>document.write(new Date().getFullYear());</script>
-                                All rights reserved | Made with
+                                | Made with
                                 <i class="fa fa-heart color-danger" aria-hidden="true"></i> by
                                 <a href="javascript:;" rel="nofollow noopener">Siddiq</a>
                             </p>
@@ -163,7 +163,7 @@
                 </div>
             </div>
         </footer>
-        <footer class="footer hide-on-desktop">
+        <footer class="footer hide-on-desktop" style="background: black;">
             <div class="container">
                 <div class="footer__top">
                     <div class="row">
@@ -177,7 +177,7 @@
                                 <p>
                                 Copyright &copy;
                                 <script>document.write(new Date().getFullYear());</script>
-                                All rights reserved | Made with
+                                | Made with
                                 <i class="fa fa-heart color-danger" aria-hidden="true"></i> by
                                 <a href="javascript:;" rel="nofollow noopener">Siddiq</a>
                             </p>
