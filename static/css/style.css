@@ -45,7 +45,7 @@
 html,
 body {
   height: 100%;
-  font-family: "Quicksand", sans-serif;
+  font-family: "Libre Baskerville", serif;
   -webkit-font-smoothing: antialiased;
 }
 h1,
@@ -79,7 +79,7 @@ h6 {
 }
 p {
   font-size: 16px;
-  font-family: "Quicksand", sans-serif;
+  font-family: "Libre Baskerville", serif;
   color: #444444;
   font-weight: 400;
   line-height: 27px;
@@ -281,7 +281,6 @@ ol {
 }
 .header__mobile__menu ul li a {
   font-size: 16px;
-  font-family: "Oswald", sans-serif;
   color: #ffffff;
   display: block;
   font-weight: bold;
@@ -346,7 +345,6 @@ ol {
 }
 .header__menu ul li a {
   font-size: 16px;
-  font-family: "Oswald", sans-serif;
   color: #ffffff;
   display: block;
   font-weight: bold;
@@ -653,7 +651,7 @@ ol {
   margin-bottom: 8px;
 }
 .testimonial__text span {
-  color: #888888;
+  color: #ffffff;
   font-size: 13px;
   font-weight: 500;
   letter-spacing: 1px;
@@ -2506,7 +2504,6 @@ ol {
 }
 .blog__details__comment__item h6 {
   font-size: 16px;
-  font-family: "Quicksand", sans-serif;
   color: #111111;
   letter-spacing: 1px;
   margin-bottom: 5px;
@@ -2796,7 +2793,7 @@ ol {
     width: 930px;
   }
   .d-col {
-    max-width: 33.33%;
+    max-width: 25%;
   }
   .instagram__post__item__hover {
     padding: 20px 25px 16px;
@@ -2986,7 +2983,7 @@ ol {
     margin-right: 8px;
   }
   .d-col {
-    max-width: 50%;
+    max-width: 33.3%;
   }
   .instagram__post__item {
     width: calc(50% - 10px);
@@ -3164,7 +3161,7 @@ ol {
     margin-top: 0;
   }
   .d-col {
-    max-width: 100%;
+    max-width: 50%;
   }
   .filter__controls li {
     margin-bottom: 10px;
