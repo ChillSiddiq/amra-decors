@@ -106,6 +106,8 @@ POSTGRES_READY = (
     and POSTGRES_PORT is not None
 )
 
+print("POSTGRES_READY", POSTGRES_READY)
+
 if POSTGRES_READY:
     DATABASES = {
         "default": {
