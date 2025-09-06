@@ -1,10 +1,10 @@
 /******************************************************************
-  Theme Name: Florist
-  Description: Florist - E-commerce Template
-  Author: Colorib
-  Author URI: https://www.colorib.com/
+  Theme Name: Amra Decors
+  Description: Amra Decors - E-commerce Template
+  Author: Mohamed Siddiq
+  Author URI: https://www.amradecorations.com/
   Version: 1.0
-  Created: Colorib 
+  Created: Mohamed Siddiq 
 ******************************************************************/
 
 /*------------------------------------------------------------------
@@ -3388,18 +3388,12 @@ ol {
   -ms-flex-pack: end !important;
   justify-content: flex-end !important;
 }
-/* @media screen and (min-width: 480px) {
-  .hide-on-mobile {
-    display: none !important;
-  }
-} */
 /* Hide on mobile (smaller than 480px or any desired width) */
 @media screen and (max-width: 479.98px) {
   .hide-on-mobile {
     display: none !important;
   }
 }
-
 /* Hide on desktop/tablet (480px and up) */
 @media screen and (min-width: 480px) {
   .hide-on-desktop {
