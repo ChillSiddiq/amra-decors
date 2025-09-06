@@ -77,7 +77,7 @@
     items: 1,
     dots: false,
     nav: false,
-    smartSpeed: 1200,
+    smartSpeed: 1500,
     autoHeight: false,
     animateOut: "fadeOut",
     animateIn: "fadeIn",
