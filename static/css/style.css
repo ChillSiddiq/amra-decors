@@ -467,6 +467,7 @@ ol {
   bottom: 30px;
   width: 1380px;
   margin: 0 auto;
+  text-align: center;
 }
 .hero__slider.owl-carousel .owl-dots button {
   height: 15px;
