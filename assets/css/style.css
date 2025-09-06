@@ -467,6 +467,7 @@ ol {
   bottom: 30px;
   width: 1380px;
   margin: 0 auto;
+  text-align: center;
 }
 .hero__slider.owl-carousel .owl-dots button {
   height: 15px;
@@ -3386,4 +3387,22 @@ ol {
 .justify-content-end {
   -ms-flex-pack: end !important;
   justify-content: flex-end !important;
+}
+/* @media screen and (min-width: 480px) {
+  .hide-on-mobile {
+    display: none !important;
+  }
+} */
+/* Hide on mobile (smaller than 480px or any desired width) */
+@media screen and (max-width: 479.98px) {
+  .hide-on-mobile {
+    display: none !important;
+  }
+}
+
+/* Hide on desktop/tablet (480px and up) */
+@media screen and (min-width: 480px) {
+  .hide-on-desktop {
+    display: none !important;
+  }
 }

@@ -3388,3 +3388,21 @@ ol {
   -ms-flex-pack: end !important;
   justify-content: flex-end !important;
 }
+/* @media screen and (min-width: 480px) {
+  .hide-on-mobile {
+    display: none !important;
+  }
+} */
+/* Hide on mobile (smaller than 480px or any desired width) */
+@media screen and (max-width: 479.98px) {
+  .hide-on-mobile {
+    display: none !important;
+  }
+}
+
+/* Hide on desktop/tablet (480px and up) */
+@media screen and (min-width: 480px) {
+  .hide-on-desktop {
+    display: none !important;
+  }
+}

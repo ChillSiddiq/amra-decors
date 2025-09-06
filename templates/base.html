@@ -129,7 +129,7 @@
         <!-- Instagram End -->
 
         <!-- Footer Section Begin -->
-        <footer class="footer">
+        <footer class="footer hide-on-mobile">
             <div class="container">
                 <div class="footer__top">
                     <div class="row align-items-center">
@@ -138,7 +138,7 @@
                                 <a href="#"><img src="{% static 'img/logo.png' %}" alt="Footer Logo" /></a>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 d-flex justify-content-center align-items-center">
+                        <div class="col-lg-6 col-md-6 d-flex text-center justify-content-center align-items-center">
                             <div class="footer__copyright" style="padding-top: 0px; padding-bottom: 0px">
                                 <p>
                                 Copyright &copy;
@@ -150,6 +150,38 @@
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-3 d-flex justify-content-end align-items-center">
+                            <div class="footer__top__social">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                                <a href="#"><i class="fa fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <footer class="footer hide-on-desktop">
+            <div class="container">
+                <div class="footer__top">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 text-center">
+                            <div class="footer__logo">
+                                <a href="#"><img src="{% static 'img/logo.png' %}" alt="Footer Logo" /></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 text-center">
+                            <div class="footer__copyright" style="padding-top: 0px;">
+                                <p>
+                                Copyright &copy;
+                                <script>document.write(new Date().getFullYear());</script>
+                                All rights reserved | Made with
+                                <i class="fa fa-heart color-danger" aria-hidden="true"></i> by
+                                <a href="javascript:;" rel="nofollow noopener">Siddiq</a>
+                            </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 text-center">
                             <div class="footer__top__social">
                                 <a href="#"><i class="fa fa-facebook"></i></a>
                                 <a href="#"><i class="fa fa-twitter"></i></a>
