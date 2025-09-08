@@ -15,7 +15,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
+from django.conf import settings
 from django.contrib import admin
+from django.conf.urls import handler404
+from django.conf.urls.static import static
+
 
 from store.views import *
 
@@ -25,8 +29,11 @@ urlpatterns = [
     path('about/', about_view, name='about'),
     path('services/', services_view, name='services'),
     path('products/', products_view, name='products'),
+    path('products/<str:slug>', products_view, name='products'),
     path('product-detail/', product_detail_view, name='product-detail'),
+    path('product-detail/<int:id>', product_detail_view, name='product-detail'),
     path('contact/', contact_view, name='contact'),
     path('admin/', admin.site.urls),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+handler404 = 'store.views.custom_404_view'

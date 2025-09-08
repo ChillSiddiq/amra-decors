@@ -1,222 +1,269 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="description" content="" />
-        <meta name="keywords" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>{% block title %}Amra Decorations{% endblock %}</title>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Link of CSS files -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/scrollcue.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/remixicon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dark-theme.css' %}">
 
-        <!-- Favicon -->
-        <link rel="icon" href="{% static 'img/favicon.png' %}" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Rowdies:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <title>{% block title %}Amra Decorations{% endblock %}</title>
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
+</head>
+<body>
 
-        <!-- CSS Styles -->
-        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css" />
-        <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css" />
-        <link rel="stylesheet" href="{% static 'css/elegant-icons.css' %}" type="text/css" />
-        <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}" type="text/css" />
-        <link rel="stylesheet" href="{% static 'css/nice-select.css' %}" type="text/css" />
-        <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" type="text/css" />
-        <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css" />
-        <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" />
-    </head>
-
-    <body>
-        <!-- Page Preloader -->
-        <div id="preloder">
-            <div class="loader"></div>
+   <!--  Preloader Start -->
+    <div class="preloader-area" id="preloader">
+        <div class="spinner">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
+    </div>
+    <!--  Preloader End -->
 
-        <!-- Offcanvas Menu Begin -->
-        <div class="offcanvas-menu-overlay"></div>
-        <div class="offcanvas-menu-wrapper">
-            <div class="offcanvas__logo">
-                <a href="{% url 'home' %}"><img src="{% static 'img/logo.png' %}" alt=""/></a>
-            </div>
-            <!-- <div class="offcanvas__search__option" style="padding-top: 10px">
-                <img class="search-switch" src="{% static 'img/icon/search.png' %}" alt="" />
-            </div> -->
-            <nav class="header__mobile__menu">
-                <ul>
-                    <li class="{% if page_name == 'home' %}active{% endif %}"><a href="{% url 'home' %}">Home</a></li>
-                    <li class="{% if page_name == 'about' %}active{% endif %}"><a href="{% url 'about' %}">About</a></li>
-                    <li class="{% if page_name == 'services' %}active{% endif %}"><a href="{% url 'services' %}">Services</a></li>
-                    <li class="{% if page_name == 'products' %}active{% endif %}"><a href="{% url 'products' %}">Products</a></li>
-                    <li class="{% if page_name == 'contact' %}active{% endif %}"><a href="{% url 'contact' %}">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-        <!-- Offcanvas Menu End -->
+    <!-- Theme Switcher Start -->
+    <!-- <div class="switch-theme-mode">
+        <label id="switch" class="switch">
+            <input type="checkbox" onchange="toggleTheme()" id="slider">
+            <span class="slider round"></span>
+        </label>
+    </div> -->
+    <!-- Theme Switcher End -->
 
-        <!-- Header Section Begin -->
-        <header class="header" style="background: black;">
-            <div class="container">
-                <div class="row">
-                    <!-- Logo -->
-                    <div class="col-lg-4">
-                        <div class="header__logo">
-                            <a href="{% url 'home' %}">
-                                <img src="{% static 'img/logo.png' %}" alt="Logo" />
-                            </a>
+    <!-- Custom Cursor -->
+    <!-- <div class="cursor"><span class="cursor-text"></span></div>
+    <div class="cursor-inner"></div> -->
+
+    <div id="smooth-wrapper">
+        <div id="smooth-content">
+
+            <!-- Top Navbar Start-->
+            <div class="navbar-top style-one bg-title">
+                <div class="container style-one">
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-4 text-lg-start text-center mb-lg-0 mb-2">
+                            <p class="position-relative text-white d-inline-block text-lg-start text-center fs-15 mb-0"><img src="{% static 'img/icons/clock-pink.svg' %}" alt="Icon">Monday To Friday : 10.00 Am – 5.00 Pm</p>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 text-center ps-xxl-5 mb-lg-0 mb-2">
+                            <p class="position-relative text-white d-inline-block fs-15 mb-0 ms-xxl-5"><img src="{% static 'img/icons/delivery-truck.svg' %}" alt="Icon">Free Delivery For Orders Above $100!</p>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-12 mb-lg-0 mb-1">
+                            <div class="social-share d-flex flex-wrap align-items-center justify-content-lg-end justify-content-center">
+                                <span class="fs-15 text-white">Follow Us:</span>
+                                <ul class="social-profile style-six list-unstyled mb-0">
+                                    <li><a href="https://www.facebook.com/" target="_blank" class="d-flex flex-column align-items-center justify-content-center rounded-circle"><i class="ri-facebook-fill"></i></a></li>
+                                    <li><a href="https://x.com/?lang=en" target="_blank" class="d-flex flex-column align-items-center justify-content-center rounded-circle"><i class="ri-twitter-x-line"></i></a></li>
+                                    <li><a href="https://www.instagram.com/amra_decoration/" target="_blank" class="d-flex flex-column align-items-center justify-content-center rounded-circle"><i class="ri-instagram-line"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/" target="_blank" class="d-flex flex-column align-items-center justify-content-center rounded-circle"><i class="ri-linkedin-fill"></i></a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <!-- Top Navbar End-->
 
-                    <!-- Navigation & Options -->
-                    <div class="col-lg-8">
-                        <div class="header__options">
-                            <!-- Navigation Menu -->
-                            <nav class="header__menu mobile-menu">
-                                <ul>
-                                    <li class="{% if page_name == 'home' %}active{% endif %}"><a href="{% url 'home' %}">Home</a></li>
-                                    <li class="{% if page_name == 'about' %}active{% endif %}"><a href="{% url 'about' %}">About</a></li>
-                                    <li class="{% if page_name == 'services' %}active{% endif %}"><a href="{% url 'services' %}">Services</a></li>
-                                    <li class="{% if page_name == 'products' %}active{% endif %}"><a href="{% url 'products' %}">Products</a></li>
-                                    <li class="{% if page_name == 'contact' %}active{% endif %}"><a href="{% url 'contact' %}">Contact</a></li>
+            <!-- Navbar Start -->
+            <div class="navbar-area style-one position-relative" id="navbar">
+                <div class="container style-one">
+                    <div class="navbar-wrapper d-flex justify-content-between align-items-center">
+                        <a href="{% url 'home' %}" class="navbar-brand">
+                            <img src="{% static 'img/logo.png' %}" alt="Logo" class="logo-light" width="270">
+                            <img src="{% static 'img/logo.png' %}" alt="Logo" class="logo-dark" width="270">
+                        </a>
+                        <div class="menu-area me-auto">
+                            <div class="overlay"></div>
+                            <nav class="menu">
+                                <div class="menu-mobile-header">
+                                    <div class="ps-4">
+                                        <a href="{% url 'home' %}" class="navbar-brand">
+                                            <img src="{% static 'img/logo.png' %}" alt="Logo" class="logo-light">
+                                            <img src="{% static 'img/logo.png' %}" alt="Logo" class="logo-dark">
+                                        </a>
+                                    </div>
+                                    <button type="button" class="menu-mobile-arrow bg-transparent border-0"><i class="ri-arrow-left-s-line"></i></button>
+                                    <div class="menu-mobile-title"></div>
+                                    <button type="button" class="menu-mobile-close bg-transparent border-0"><i class="ri-close-line"></i></button>
+                                </div>
+                                <ul class="menu-section p-0 mb-0 lh-1">
+                                    {% for x in categories %}
+                                    {% if x.menu %}
+                                    <li><a href="{% url 'products' x.slug %}">{{ x.name }}</a></li>
+                                    {% endif %} 
+                                    {% endfor %}
+                                    <li><a href="{% url 'contact' %}">Contact</a></li>
                                 </ul>
                             </nav>
-
-                            <!-- Right Side Options -->
-                            <div class="header__option__right">
-                                <div class="header__option__right__search">
-                                    <img class="search-switch" src="{% static 'img/icon/search.png' %}" alt="Search Icon" />
-                                </div>
-                                <!-- <div class="header__option__right__cart">
-                                    <ul>
-                                        <li>
-                                            <a href="{% url 'login' %}">
-                                                <img src="{% static 'img/icon/user.jpg' %}" width="27" alt="User Icon" />
-                                                <span>Login</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div> -->
-                            </div>
-
                         </div>
-                    </div>
-                </div>
-
-                <!-- Mobile Nav Trigger -->
-                <div class="canvas__open"><i class="fa fa-bars"></i></div>
-            </div>
-        </header>
-        <!-- Header Section End -->
-
-        {% block content %}
-        <!-- Your page-specific content goes here -->
-        {% endblock %}
-
-        <!-- Instagram Begin -->
-        <div class="instagram">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="instagram__post">
-                            {% for i in "12345" %}
-                            <div class="instagram__post__item set-bg" data-setbg="{% static 'img/instagram/insta-'|add:i|add:'.jpg' %}">
-                                <div class="instagram__post__item__hover">
-                                    <i class="fa fa-instagram"></i>
-                                    <h6>Follow us <a href="#">@amra_decoration</a></h6>
-                                </div>
+                        <div class="other-options d-flex flex-wrap align-items-center justify-content-end">
+                            <div class="option-item d-lg-none">
+                                <button type="button" class="menu-mobile-trigger">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </button>
                             </div>
-                            {% endfor %}
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- Navbar End -->
+
+            {% block content %}
+            <!-- Your page-specific content goes here -->
+            {% endblock %}
+
+            <!-- Footer Section Start -->
+            <footer class="footer-area style-one position-relative z-1 pt-120">
+                <img src="{% static 'img/footer-dot-shape.png' %}" alt="Shape" class="footer-dots position-absolute top-0 start-0 w-100 h-100 z-n1">
+                <img src="{% static 'img/top-zigzag-shape.svg' %}" alt="Shape" class="footer-top-shape position-absolute top-0 start-0 w-100 z-n1">
+                <div class="footer-top position-relative z-1">
+                    <div class="container style-one">
+                        <h2 class="section-title style-one fw-normal text-title text-center mb-45">Follow Us On Instagram</h2>
+                    </div>
+                    <div class="insta-slider-three swiper pb-120">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <a href="https://www.instagram.com/amra_decoration/" target="_blank" class="insta-card style-two position-relative round-20">
+                                    <img src="{% static 'img/instagram/insta-15.jpg' %}" alt="Image" class="round-20">
+                                    <span class="bg_primary d-flex flex-column align-items-center justify-content-center rounded-circle position-absolute transition"><i class="ri-instagram-line"></i></span>
+                                </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="https://www.instagram.com/amra_decoration/" target="_blank" class="insta-card style-two position-relative round-20">
+                                    <img src="{% static 'img/instagram/insta-16.jpg' %}" alt="Image" class="round-20">
+                                    <span class="bg_primary d-flex flex-column align-items-center justify-content-center rounded-circle position-absolute transition"><i class="ri-instagram-line"></i></span>
+                                </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="https://www.instagram.com/amra_decoration/" target="_blank" class="insta-card style-two position-relative round-20">
+                                    <img src="{% static 'img/instagram/insta-17.jpg' %}" alt="Image" class="round-20">
+                                    <span class="bg_primary d-flex flex-column align-items-center justify-content-center rounded-circle position-absolute transition"><i class="ri-instagram-line"></i></span>
+                                </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="https://www.instagram.com/amra_decoration/" target="_blank" class="insta-card style-two position-relative round-20">
+                                    <img src="{% static 'img/instagram/insta-18.jpg' %}" alt="Image" class="round-20">
+                                    <span class="bg_primary d-flex flex-column align-items-center justify-content-center rounded-circle position-absolute transition"><i class="ri-instagram-line"></i></span>
+                                </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="https://www.instagram.com/amra_decoration/" target="_blank" class="insta-card style-two position-relative round-20">
+                                    <img src="{% static 'img/instagram/insta-19.jpg' %}" alt="Image" class="round-20">
+                                    <span class="bg_primary d-flex flex-column align-items-center justify-content-center rounded-circle position-absolute transition"><i class="ri-instagram-line"></i></span>
+                                </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="https://www.instagram.com/amra_decoration/" target="_blank" class="insta-card style-two position-relative round-20">
+                                    <img src="{% static 'img/instagram/insta-20.jpg' %}" alt="Image" class="round-20">
+                                    <span class="bg_primary d-flex flex-column align-items-center justify-content-center rounded-circle position-absolute transition"><i class="ri-instagram-line"></i></span>
+                                </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="https://www.instagram.com/amra_decoration/" target="_blank" class="insta-card style-two position-relative round-20">
+                                    <img src="{% static 'img/instagram/insta-21.jpg' %}" alt="Image" class="round-20">
+                                    <span class="bg_primary d-flex flex-column align-items-center justify-content-center rounded-circle position-absolute transition"><i class="ri-instagram-line"></i></span>
+                                </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="https://www.instagram.com/amra_decoration/" target="_blank" class="insta-card style-two position-relative round-20">
+                                    <img src="{% static 'img/instagram/insta-22.jpg' %}" alt="Image" class="round-20">
+                                    <span class="bg_primary d-flex flex-column align-items-center justify-content-center rounded-circle position-absolute transition"><i class="ri-instagram-line"></i></span>
+                                </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="https://www.instagram.com/amra_decoration/" target="_blank" class="insta-card style-two position-relative round-20">
+                                    <img src="{% static 'img/instagram/insta-15.jpg' %}" alt="Image" class="round-20">
+                                    <span class="bg_primary d-flex flex-column align-items-center justify-content-center rounded-circle position-absolute transition"><i class="ri-instagram-line"></i></span>
+                                </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="https://www.instagram.com/amra_decoration/" target="_blank" class="insta-card style-two position-relative round-20">
+                                    <img src="{% static 'img/instagram/insta-16.jpg' %}" alt="Image" class="round-20">
+                                    <span class="bg_primary d-flex flex-column align-items-center justify-content-center rounded-circle position-absolute transition"><i class="ri-instagram-line"></i></span>
+                                </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="https://www.instagram.com/amra_decoration/" target="_blank" class="insta-card style-two position-relative round-20">
+                                    <img src="{% static 'img/instagram/insta-17.jpg' %}" alt="Image" class="round-20">
+                                    <span class="bg_primary d-flex flex-column align-items-center justify-content-center rounded-circle position-absolute transition"><i class="ri-instagram-line"></i></span>
+                                </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="https://www.instagram.com/amra_decoration/" target="_blank" class="insta-card style-two position-relative round-20">
+                                    <img src="{% static 'img/instagram/insta-18.jpg' %}" alt="Image" class="round-20">
+                                    <span class="bg_primary d-flex flex-column align-items-center justify-content-center rounded-circle position-absolute transition"><i class="ri-instagram-line"></i></span>
+                                </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="https://www.instagram.com/amra_decoration/" target="_blank" class="insta-card style-two position-relative round-20">
+                                    <img src="{% static 'img/instagram/insta-19.jpg' %}" alt="Image" class="round-20">
+                                    <span class="bg_primary d-flex flex-column align-items-center justify-content-center rounded-circle position-absolute transition"><i class="ri-instagram-line"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom position-relative bg-title z-1">
+                    <div class="container style-one">
+                        <div class="row">
+                            <div class="col-md-7">
+                                 <p class="copyright-text text-white text-md-start text-center mb-0"><i class="ri-copyright-line"></i><span class="text-white fw-medium">Amra Decorations</span> | Made with <i class="ri-heart-2-fill"></i> by <span class="text-white fw-medium">Siddiq</span></p>
+                            </div>
+                            <div class="col-md-5">
+                                <ul class="footer-bottom-menu list-unstyled text-lg-end text-center mb-0">
+                                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                                    <li><a href="terms-conditions.html">Terms & Conditions</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- Footer End -->
+
         </div>
-        <!-- Instagram End -->
+    </div>
+    <!-- Back to Top -->
+    <div id="progress-wrap" class="progress-wrap style-one">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+          <path id="progress-path" d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+        </svg>
+    </div>
 
-        <!-- Footer Section Begin -->
-        <footer class="footer hide-on-mobile" style="background: black;">
-            <div class="container">
-                <div class="footer__top">
-                    <div class="row align-items-center">
-                        <div class="col-lg-3 col-md-3 d-flex align-items-center">
-                            <div class="footer__logo">
-                                <a href="#"><img src="{% static 'img/logo.png' %}" alt="Footer Logo" /></a>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 d-flex text-center justify-content-center align-items-center">
-                            <div class="footer__copyright" style="padding-top: 0px; padding-bottom: 0px">
-                                <p>
-                                Copyright &copy;
-                                <script>document.write(new Date().getFullYear());</script>
-                                | Made with
-                                <i class="fa fa-heart color-danger" aria-hidden="true"></i> by
-                                <a href="javascript:;" rel="nofollow noopener">Siddiq</a>
-                            </p>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3 d-flex justify-content-end align-items-center">
-                            <div class="footer__top__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                                <a href="#"><i class="fa fa-linkedin"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <footer class="footer hide-on-desktop" style="background: black;">
-            <div class="container">
-                <div class="footer__top">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-3 text-center">
-                            <div class="footer__logo">
-                                <a href="#"><img src="{% static 'img/logo.png' %}" alt="Footer Logo" /></a>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 text-center">
-                            <div class="footer__copyright" style="padding-top: 0px;">
-                                <p>
-                                Copyright &copy;
-                                <script>document.write(new Date().getFullYear());</script>
-                                | Made with
-                                <i class="fa fa-heart color-danger" aria-hidden="true"></i> by
-                                <a href="javascript:;" rel="nofollow noopener">Siddiq</a>
-                            </p>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3 text-center">
-                            <div class="footer__top__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                                <a href="#"><i class="fa fa-linkedin"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- Footer Section End -->
-
-        <!-- Search Begin -->
-        <div class="search-model">
-            <div class="h-100 d-flex align-items-center justify-content-center">
-                <div class="search-close-switch">+</div>
-                <form class="search-model-form">
-                    <input type="text" id="search-input" placeholder="Search here....." />
-                </form>
-            </div>
-        </div>
-        <!-- Search End -->
-
-        <!-- JS scripts would go here -->
-        <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
-        <script src="{% static 'js/bootstrap.min.js' %}"></script>
-        <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
-        <script src="{% static 'js/mixitup.min.js' %}"></script>
-        <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
-        <script src="{% static 'js/jquery.nicescroll.min.js' %}"></script>
-        <script src="{% static 'js/jquery.slicknav.js' %}"></script>
-        <script src="{% static 'js/owl.carousel.min.js' %}"></script>
-        <script src="{% static 'js/main.js' %}"></script>
-    </body>
+    <!-- Link of JS files -->
+    <!-- <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script> -->
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/megamenu.js' %}"></script>
+    <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'js/fslightbox.js' %}"></script>
+    <script src="{% static 'js/gsap.min.js' %}"></script>
+    <script src="{% static 'js/scrollTrigger.min.js' %}"></script>
+    <script src="{% static 'js/lenis.min.js' %}"></script>
+    <script src="{% static 'js/scrollToPlugin.js' %}"></script>
+    <script src="{% static 'js/SplitText.min.js' %}"></script>
+    <script src="{% static 'js/customEase.js' %}"></script>
+    <script src="{% static 'js/scrollcue.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
 </html>

@@ -1,214 +1,67 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}Products | Amra Decorations{% endblock %}
+{% block title %}Amra Decorations{% endblock %}
 
 {% block content %}
-	    <!-- Product Section Begin -->
-	    <section class="product spad">
-	        <div class="container">
-	            <div class="product__widget">
-	                <div class="row">
-	                    <div class="col-lg-7 col-md-6">
-	                        <div class="product__widget__text">
-	                            <i class="fa fa-bars"></i>
-	                            <p>Showing 1–9 of 14 results</p>
-	                        </div>
-	                    </div>
-	                    <div class="col-lg-5 col-md-6">
-	                        <div class="product__widget__filter">
-	                            <select>
-	                                <option value="">Sort by popularity</option>
-	                                <option value="">A to Z</option>
-	                                <option value="">1 to 9</option>
-	                            </select>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	            <div class="row">
-	                <div class="d-col">
-	                    <div class="product__item" style="cursor:pointer;" onclick="window.location.href='{% url 'product-detail' %}';">
-	                        <div class="product__item__pic set-bg" data-setbg="{% static 'img/product/product-1.jpg' %}">
-	                            <div class="label">New</div>
-	                        </div>
-	                        <div class="product__item__text">
-	                            <h5><a href="{% url 'product-detail' %}">Fly Me To The Moon</a></h5>
-	                            <div class="price">$27.50</div>
-	                            <a href="{% url 'product-detail' %}" class="cart-btn">View</a>
-	                        </div>
-	                    </div>
-	                </div>
-	                <div class="d-col">
-	                    <div class="product__item" style="cursor:pointer;" onclick="window.location.href='{% url 'product-detail' %}';">
-	                        <div class="product__item__pic set-bg" data-setbg="{% static 'img/product/product-2.jpg' %}">
-	                        </div>
-	                        <div class="product__item__text">
-	                            <h5><a href="{% url 'product-detail' %}">Fly Me To The Moon</a></h5>
-	                            <div class="price">$27.50</div>
-	                            <a href="{% url 'product-detail' %}" class="cart-btn">View</a>
-	                        </div>
-	                    </div>
-	                </div>
-	                <div class="d-col">
-	                    <div class="product__item" style="cursor:pointer;" onclick="window.location.href='{% url 'product-detail' %}';">
-	                        <div class="product__item__pic set-bg" data-setbg="{% static 'img/product/product-3.jpg' %}">
-	                            <div class="label">Sale</div>
-	                        </div>
-	                        <div class="product__item__text">
-	                            <h5><a href="{% url 'product-detail' %}">Fly Me To The Moon</a></h5>
-	                            <div class="price">$27.50</div>
-	                            <a href="{% url 'product-detail' %}" class="cart-btn">View</a>
-	                        </div>
-	                    </div>
-	                </div>
-	                <div class="d-col">
-	                    <div class="product__item" style="cursor:pointer;" onclick="window.location.href='{% url 'product-detail' %}';">
-	                        <div class="product__item__pic set-bg" data-setbg="{% static 'img/product/product-4.jpg' %}">
-	                        </div>
-	                        <div class="product__item__text">
-	                            <h5><a href="{% url 'product-detail' %}">Fly Me To The Moon</a></h5>
-	                            <div class="price">$27.50</div>
-	                            <a href="{% url 'product-detail' %}" class="cart-btn">View</a>
-	                        </div>
-	                    </div>
-	                </div>
-	                <div class="d-col">
-	                    <div class="product__item" style="cursor:pointer;" onclick="window.location.href='{% url 'product-detail' %}';">
-	                        <div class="product__item__pic set-bg" data-setbg="{% static 'img/product/product-5.jpg' %}">
-	                        </div>
-	                        <div class="product__item__text">
-	                            <h5><a href="{% url 'product-detail' %}">Fly Me To The Moon</a></h5>
-	                            <div class="price">$27.50</div>
-	                            <a href="{% url 'product-detail' %}" class="cart-btn">View</a>
-	                        </div>
-	                    </div>
-	                </div>
-	                <div class="d-col">
-	                    <div class="product__item" style="cursor:pointer;" onclick="window.location.href='{% url 'product-detail' %}';">
-	                        <div class="product__item__pic set-bg" data-setbg="{% static 'img/product/product-6.jpg' %}">
-	                        </div>
-	                        <div class="product__item__text">
-	                            <h5><a href="{% url 'product-detail' %}">Fly Me To The Moon</a></h5>
-	                            <div class="price">$27.50</div>
-	                            <a href="{% url 'product-detail' %}" class="cart-btn">View</a>
-	                        </div>
-	                    </div>
-	                </div>
-	                <div class="d-col">
-	                    <div class="product__item" style="cursor:pointer;" onclick="window.location.href='{% url 'product-detail' %}';">
-	                        <div class="product__item__pic set-bg" data-setbg="{% static 'img/product/product-7.jpg' %}">
-	                            <div class="label">Out Of Stock</div>
-	                        </div>
-	                        <div class="product__item__text">
-	                            <h5><a href="{% url 'product-detail' %}">Fly Me To The Moon</a></h5>
-	                            <div class="price">$27.50</div>
-	                            <a href="{% url 'product-detail' %}" class="cart-btn">View</a>
-	                        </div>
-	                    </div>
-	                </div>
-	                <div class="d-col">
-	                    <div class="product__item" style="cursor:pointer;" onclick="window.location.href='{% url 'product-detail' %}';">
-	                        <div class="product__item__pic set-bg" data-setbg="{% static 'img/product/product-8.jpg' %}">
-	                            <div class="label">New</div>
-	                        </div>
-	                        <div class="product__item__text">
-	                            <h5><a href="{% url 'product-detail' %}">Fly Me To The Moon</a></h5>
-	                            <div class="price">$27.50</div>
-	                            <a href="{% url 'product-detail' %}" class="cart-btn">View</a>
-	                        </div>
-	                    </div>
-	                </div>
-	                <div class="d-col">
-	                    <div class="product__item" style="cursor:pointer;" onclick="window.location.href='{% url 'product-detail' %}';">
-	                        <div class="product__item__pic set-bg" data-setbg="{% static 'img/product/product-9.jpg' %}">
-	                        </div>
-	                        <div class="product__item__text">
-	                            <h5><a href="{% url 'product-detail' %}">Fly Me To The Moon</a></h5>
-	                            <div class="price">$27.50</div>
-	                            <a href="{% url 'product-detail' %}" class="cart-btn">View</a>
-	                        </div>
-	                    </div>
-	                </div>
-	                <div class="d-col">
-	                    <div class="product__item" style="cursor:pointer;" onclick="window.location.href='{% url 'product-detail' %}';">
-	                        <div class="product__item__pic set-bg" data-setbg="{% static 'img/product/product-10.jpg' %}">
-	                            <div class="label">New</div>
-	                        </div>
-	                        <div class="product__item__text">
-	                            <h5><a href="{% url 'product-detail' %}">Fly Me To The Moon</a></h5>
-	                            <div class="price">$27.50</div>
-	                            <a href="{% url 'product-detail' %}" class="cart-btn">View</a>
-	                        </div>
-	                    </div>
-	                </div>
-	                <div class="d-col">
-	                    <div class="product__item" style="cursor:pointer;" onclick="window.location.href='{% url 'product-detail' %}';">
-	                        <div class="product__item__pic set-bg" data-setbg="{% static 'img/product/product-11.jpg' %}">
-	                        </div>
-	                        <div class="product__item__text">
-	                            <h5><a href="{% url 'product-detail' %}">Fly Me To The Moon</a></h5>
-	                            <div class="price">$27.50</div>
-	                            <a href="{% url 'product-detail' %}" class="cart-btn">View</a>
-	                        </div>
-	                    </div>
-	                </div>
-	                <div class="d-col">
-	                    <div class="product__item" style="cursor:pointer;" onclick="window.location.href='{% url 'product-detail' %}';">
-	                        <div class="product__item__pic set-bg" data-setbg="{% static 'img/product/product-12.jpg' %}">
-	                            <div class="label">Out Of Stock</div>
-	                        </div>
-	                        <div class="product__item__text">
-	                            <h5><a href="{% url 'product-detail' %}">Fly Me To The Moon</a></h5>
-	                            <div class="price">$27.50</div>
-	                            <a href="{% url 'product-detail' %}" class="cart-btn">View</a>
-	                        </div>
-	                    </div>
-	                </div>
-	                <div class="d-col">
-	                    <div class="product__item" style="cursor:pointer;" onclick="window.location.href='{% url 'product-detail' %}';">
-	                        <div class="product__item__pic set-bg" data-setbg="{% static 'img/product/product-13.jpg' %}">
-	                            <div class="label">New</div>
-	                        </div>
-	                        <div class="product__item__text">
-	                            <h5><a href="{% url 'product-detail' %}">Fly Me To The Moon</a></h5>
-	                            <div class="price">$27.50</div>
-	                            <a href="{% url 'product-detail' %}" class="cart-btn">View</a>
-	                        </div>
-	                    </div>
-	                </div>
-	                <div class="d-col">
-	                    <div class="product__item" style="cursor:pointer;" onclick="window.location.href='{% url 'product-detail' %}';">
-	                        <div class="product__item__pic set-bg" data-setbg="{% static 'img/product/product-14.jpg' %}">
-	                        </div>
-	                        <div class="product__item__text">
-	                            <h5><a href="{% url 'product-detail' %}">Fly Me To The Moon</a></h5>
-	                            <div class="price">$27.50</div>
-	                            <a href="{% url 'product-detail' %}" class="cart-btn">View</a>
-	                        </div>
-	                    </div>
-	                </div>
-	                <div class="d-col">
-	                    <div class="product__item" style="cursor:pointer;" onclick="window.location.href='{% url 'product-detail' %}';">
-	                        <div class="product__item__pic set-bg" data-setbg="{% static 'img/product/product-15.jpg' %}">
-	                            <div class="label">New</div>
-	                        </div>
-	                        <div class="product__item__text">
-	                            <h5><a href="{% url 'product-detail' %}">Fly Me To The Moon</a></h5>
-	                            <div class="price">$27.50</div>
-	                            <a href="{% url 'product-detail' %}" class="cart-btn">View</a>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	            <div class="row">
-	                <div class="col-lg-12 text-center">
-	                    <div class="view__all">
-	                        <a href="{% url 'product-detail' %}">Load more products</a>
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
-	    </section>
-	    <!-- Product Section End -->
+			<!-- Breadcrumb Section Start -->
+            <div class="breadcrumb-area position-relative z-1">
+                <div class="container style-one text-center">
+                    <div class="row align-items-center">
+                        <div class="col-xxl-12 col-lg-12 col-md-12 mb-sm-10">
+                            <h2 class="br-title fw-normal mb-12">Products</h2>
+                            <ul class="br-menu list-unstyled mb-0">
+                                <li><a href="{% url 'home' %}">Home</a></li>
+                                <li>Products</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Breadcrumb Section End -->
+
+			<!-- Shop Start -->
+            <div class="container style-one ptb-120">
+                <div class="row">
+                    <div class="col-xl-9 order-xl-2 order-1">
+                        <div class="row">
+                        	{% for product in products %}
+                            <div class="col-xl-4 col-lg-4 col-md-6">
+                            	<div class="product-card style-four position-relative text-center img-hover-zoom round-20 mb-30" onclick="window.location.href='{% url 'product-detail' product.id %}';">
+		                            <div class="product-img round-15">
+		                                <img src="{{ product.image.url }}" alt="Image" class="round-15">
+		                            </div>
+		                            <ul class="rating list-unstyled mb-15">
+		                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
+		                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
+		                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
+		                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
+		                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
+		                            </ul>
+		                            <h3 class="fs-24"><a href="{% url 'product-detail' product.id %}" class="text-title link-hover-primary">{{ product.name }}</a></h3>
+                                    {% if product.discount_price %}
+                                    <div class="product-price fs-xxl-18 d-block"><span class="fw-normal text_primary">₹{{ product.discount_price }}</span> <span class="text-para fw-light text-decoration-line-through ms-2">₹{{ product.price }}</span></div>
+                                    {% else %}
+                                    <div class="product-price fs-xxl-18 d-block"><span class="fw-normal text_primary">₹{{ product.price }}</span></div>
+                                    {% endif %}
+		                        </div>
+                            </div>
+                        	{% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-xl-3 order-xl-1 order-2">
+                        <aside class="sidebar mt-lg-50">
+                            <div class="sidebar-widget category-widget round-20">
+                                <h3 class="sidebar-widget-title fs-20 fw-normal text-title mb-20">Product Category</h3>
+                                <ul class="list-unstyled mb-0">
+                                	{% for x in categories %}
+                                    <li><a href="{% url 'products' x.slug %}" class="position-relative">{{ x.name }}<img src="{% static 'img/icons/right-arrow-black.svg' %}" alt="Icon" class="transition"></a></li>
+                                	{% endfor %}
+                                </ul>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+            <!-- Shop End -->
 {% endblock %}

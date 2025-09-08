@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Amra Decorations{% endblock %}
+
+{% block content %}
+			<!-- Breadcrumb Section Start -->
+            <div class="breadcrumb-area position-relative z-1">
+                <div class="container style-one text-center">
+                    <div class="row align-items-center">
+                        <div class="col-xxl-12 col-lg-12 col-md-12 mb-sm-10">
+                            <h2 class="br-title fw-normal mb-12">{{ product.name }}</h2>
+                            <ul class="br-menu list-unstyled mb-0">
+                                <li><a href="{% url 'home' %}">Home</a></li>
+                                <li><a href="{% url 'products' %}">Products</a></li>
+                                <li>{{ product.name }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Breadcrumb Section End -->
+
+            <!-- Shop Details Start -->
+            <div class="container style-one pt-120">
+                <div class="product-details-wrapper pb-90">
+                    <div class="row align-items-center">
+                        <div class="col-xxl-5 col-lg-6">
+                            <div class="single-product-img bg-ash d-flex flex-column align-items-center justify-content-center round-20 mb-md-30">
+                                <a data-fslightbox="gallery" href="{{ product.image.url }}" class="d-block">
+                                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="d-block mx-auto">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xxl-7 col-lg-6 ps-xl-5">
+                            <div class="single-product-info">
+                                <h1 class="fw-normal text-title mb-0">{{ product.name }}</h1>
+                                {% if product.discount_price %}
+                                <div class="product-price fs-xxl-18 fw-normal pb-2"><span class="fw-normal text_primary">₹{{ product.discount_price }}</span> <span class="text-para fw-light text-decoration-line-through ms-2">₹{{ product.price }}</span></div>
+                                {% else %}
+                                <div class="product-price fs-xxl-18 fw-normal pb-2"><span class="fw-normal text_primary">₹{{ product.price }}</span></div>
+                                {% endif %}
+                                <ul class="rating d-flex flex-wrap list-unstyled mb-15">
+                                    <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
+                                    <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
+                                    <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
+                                    <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
+                                    <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
+                                </ul>
+                                <p>We aim to inspire a culture of meaningful giving by offering unique, high-quality products that celebrate life’s moments big and small. As we grow, we envision a community where every gift shared brings people closer together and leaves a lasting impression of care</p>
+                                <ul class="shop-features list-unstyled">
+                                    <li class="text-para d-flex flex-wrap align-items-center">
+                                        <span class="text-title fw-medium me-1">Category:</span>
+                                        {% for category in product.categories.all %}
+                                            <a href="{% url 'products' category.slug %}" class="text-para hover-text-primary">
+                                                {{ category.name }}
+                                            </a>{% if not forloop.last %},&nbsp;{% endif %}
+                                        {% endfor %}
+                                    </li>
+                                </ul>
+                                <div class="shop-action d-flex flex-wrap align-items-center justify-content-between mb-45">
+                                    <span class="text_primary fw-bold me-3">Quantity:</span>
+                                    <div class="v-counter d-flex flex-wrap align-items-center bg-white">
+                                        <button class="plusBtn bg-transparent border-0">
+                                        </button>
+                                        <input type="text" size="25" value="1" class="count" />
+                                        <button class="minusBtn bg-transparent border-0">
+                                        </button>
+                                    </div>
+                                </div>
+                                <button class="btn style-two position-relative z-1 round-10 mb-25" type="button" onclick="sendWhatsappMessage()"><i class="ri-whatsapp-line"></i> Order Now</span></button>
+                                <div class="post-share d-flex flex-wrap align-items-center">
+                                    <span class="text-para fw-semibold me-3">Share:</span>
+                                    <ul class="social-profile style-three list-unstyled mb-0 d-flex gap-2">
+                                        <li>
+                                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" 
+                                               target="_blank" 
+                                               rel="noopener noreferrer" 
+                                               aria-label="Share on Facebook"
+                                               class="d-flex align-items-center justify-content-center bg-ash rounded-circle">
+                                                <i class="ri-facebook-fill"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://x.com/intent/tweet?url={{ request.build_absolute_uri }}" 
+                                               target="_blank" 
+                                               rel="noopener noreferrer" 
+                                               aria-label="Share on X (Twitter)"
+                                               class="d-flex align-items-center justify-content-center bg-ash rounded-circle">
+                                                <i class="ri-twitter-x-line"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}" 
+                                               target="_blank" 
+                                               rel="noopener noreferrer" 
+                                               aria-label="Share on LinkedIn"
+                                               class="d-flex align-items-center justify-content-center bg-ash rounded-circle">
+                                                <i class="ri-linkedin-fill"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ul class="nav nav-tabs list-unstyled product-tablist style-two d-inline-flex align-items-center mb-25" role="tablist">
+                    <li class="nav-item border-0">
+                        <button class="nav-link border-0 active" data-bs-toggle="tab" data-bs-target="#tab_1" type="button" role="tab">Description</button>
+                    </li>
+                </ul>
+                <div class="tab-content product-tab-content pb-120">
+                    <div class="tab-pane fade show active" id="tab_1" role="tabpanel">
+                        <div class="product_desc">
+                            <p>{{ product.description|safe }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Shop Details End -->
+
+            <script>
+                function sendWhatsappMessage() {
+                    const productName = "{{ product.name }}";
+                    const productUrl = window.location.href;  // gets the current page URL
+                    const quantity = document.querySelector('.count').value;
+
+                    const message = `Hello, I want to order the following product:\n` +
+                        `*Product:* ${productName}\n` +
+                        `*Quantity:* ${quantity}\n` +
+                        `*URL:* ${productUrl}`;
+
+                    const whatsappNumber = "+919789939238"; // e.g., "919876543210" (without +)
+                    const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+                    window.open(whatsappLink, "_blank");
+                }
+            </script>
+
+{% endblock %}

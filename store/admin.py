@@ -5,7 +5,7 @@ from django.contrib import admin
 from .models import Categories, Coupons, Roles, Profile, Products
 
 class CategoriesAdmin(admin.ModelAdmin):
-	list_display = ('name', 'parent', 'active', 'created_at')
+	list_display = ('name', 'parent', 'active', 'menu', 'created_at')
 	prepopulated_fields = {"slug": ("name",)}
 	list_filter = ('active', 'parent')
 	search_fields = ('name',)
