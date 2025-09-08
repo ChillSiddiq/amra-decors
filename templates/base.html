@@ -23,7 +23,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Rowdies:wght@300;400;700&display=swap" rel="stylesheet">
     
-    <title>{% block title %}Amra Decorations{% endblock %}</title>
+    <title>{% block title %}{{ page_title }}{% endblock %}</title>
     <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
 </head>
 <body>
@@ -232,8 +232,8 @@
                             </div>
                             <div class="col-md-5">
                                 <ul class="footer-bottom-menu list-unstyled text-lg-end text-center mb-0">
-                                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                                    <li><a href="terms-conditions.html">Terms & Conditions</a></li>
+                                    <li><a href="javascript:;">Privacy Policy</a></li>
+                                    <li><a href="javascript:;">Terms & Conditions</a></li>
                                 </ul>
                             </div>
                         </div>

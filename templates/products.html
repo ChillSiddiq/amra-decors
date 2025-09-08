@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
+{% load custom_filters %}
 
-{% block title %}Amra Decorations{% endblock %}
+{% block title %}{{ page_title }}{% endblock %}
 
 {% block content %}
 			<!-- Breadcrumb Section Start -->
@@ -9,10 +10,10 @@
                 <div class="container style-one text-center">
                     <div class="row align-items-center">
                         <div class="col-xxl-12 col-lg-12 col-md-12 mb-sm-10">
-                            <h2 class="br-title fw-normal mb-12">Products</h2>
+                            <h2 class="br-title fw-normal mb-12">{{ page_title|split_first }}</h2>
                             <ul class="br-menu list-unstyled mb-0">
                                 <li><a href="{% url 'home' %}">Home</a></li>
-                                <li>Products</li>
+                                <li>{{ page_title|split_first }}</li>
                             </ul>
                         </div>
                     </div>

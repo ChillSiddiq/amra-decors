@@ -9,6 +9,7 @@ def home_view(request):
 
     page_data = {
         'page_name': 'home',
+        'page_title': 'Amra Decorations | Transforming Ideas into Timeless Decor',
         'categories': categories,
     }
 
@@ -29,6 +30,7 @@ def services_view(request):
 
     page_data = {
         'page_name': 'services',
+        'page_title': 'Services',
         'categories': categories,
     }
     
@@ -36,15 +38,21 @@ def services_view(request):
 
 def products_view(request, slug=''):
     if slug:
-        category = Categories.objects.filter(slug=slug)
-        products = Products.objects.filter(categories__in=category)
+        category = Categories.objects.filter(slug=slug).first()
+        if category:
+            products = Products.objects.filter(categories__in=[category], active=True)
+            page_title = f'{category.name} | Amra Decorations'
+        else:
+            return redirect('products')
     else:
         products = Products.objects.filter(active=True)
+        page_title = 'Products | Amra Decorations'
     
     categories = Categories.objects.filter(active=True)
 
     page_data = {
         'page_name': 'products',
+        'page_title': page_title,
         'products': products,
         'categories': categories,
     }
@@ -56,12 +64,13 @@ def product_detail_view(request, id=''):
 
     if id:
         product = Products.objects.get(id=id)
-        print(product.name)
+        page_title = f'{product.name} | Amra Decorations'
     else:
         return redirect('home')
 
     page_data = {
         'page_name': 'product-detail',
+        'page_title': page_title,
         'product': product,
         'categories': categories,
     }
@@ -73,6 +82,7 @@ def contact_view(request):
 
     page_data = {
         'page_name': 'contact',
+        'page_title': 'Contact | Amra Decorations',
         'categories': categories,
     }
     
@@ -83,6 +93,7 @@ def login_view(request):
 
     page_data = {
         'page_name': 'login',
+        'page_title': 'Login | Amra Decorations',
         'categories': categories,
     }
     
@@ -93,6 +104,7 @@ def custom_404_view(request, exception):
     
     page_data = {
         'page_name': '404',
+        'page_title': 'Page not found | Amra Decorations',
         'categories': categories,
     }
     
