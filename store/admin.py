@@ -81,7 +81,7 @@ class ProductAdminForm(forms.ModelForm):
 
 class ProductsAdmin(admin.ModelAdmin):
     form = ProductAdminForm
-    list_display = ('code', 'name', 'get_categories', 'price', 'discount_price', 'stock', 'active', 'created_at')
+    list_display = ('code', 'name', 'get_categories', 'price', 'discount_price', 'active', 'created_at')
     list_filter = ('active', 'categories')
     search_fields = ('code', 'name', 'description')
     prepopulated_fields = {'slug': ('name',)}
@@ -94,7 +94,7 @@ class ProductsAdmin(admin.ModelAdmin):
     get_categories.short_description = 'Categories'  # This sets the column header
 
 admin.site.register(Categories, CategoriesAdmin)
-admin.site.register(Coupons, CouponsAdmin)
+# admin.site.register(Coupons, CouponsAdmin)
 admin.site.register(Roles, RolesAdmin)
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Products, ProductsAdmin)
