@@ -937,7 +937,8 @@ body {
   border-color: transparent;
 }
 .social-profile.style-six li a:hover i {
-  color: var(--primaryColor);
+  /* color: var(--primaryColor); */
+  color: var(--whiteColor);
 }
 .social-profile.style-two li a:hover {
   background-color: var(--secondaryColor);
