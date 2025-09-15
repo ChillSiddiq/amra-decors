@@ -9,22 +9,31 @@
                 <img src="{% static 'img/hero/dot-shape.svg' %}" alt="Shape" class="hero-dots position-absolute top-0 start-0 w-100 h-100 z-n1">
                 <img src="{% static 'img/bottom-zigzag-shape.svg' %}" alt="Shape" class="bottom-shape position-absolute bottom-0 start-0 w-100 z-n1">
                 <div class="container style-one">
-                    <div class="row align-items-center">
-                        <div class="col-xl-8 col-lg-8 pe-xxl-5">
-                            <div class="hero-content mb-lg-30">
-                                <h6 class="section-subtile fs-xxl-20 fw-light text_primary mb-6">Making People Happy</h6>
-                                <h1>Craving Sweets You Come To The Right Place</h1>
-                                <p class="fs-xxl-18 pe-xxl-5">Our cake bakery every creation is crafted with love passion and a sprinkle of sweetness from classic favorites to custom designed masterpieces</p>
-                                <div class="btn-wrap d-flex flex-wrap align-items-center">
-                                    <a href="{% url 'products' %}" class="btn style-two position-relative z-1 round-10">Browse Our Products</a>
+                    <div class="swiper swiper-container">
+                        <div class="swiper-wrapper">
+                            {% for slide in banner.slides.all %}
+                            <div class="swiper-slide d-flex align-items-center">
+                                <div class="row align-items-center">
+                                    <div class="col-xl-8 col-lg-8 pe-xxl-5">
+                                        <div class="hero-content mb-lg-30">
+                                            <h6 class="section-subtile fs-xxl-20 fw-light text_primary mb-6">{{ slide.subtitle }}</h6>
+                                            <h1>{{ slide.title }}</h1>
+                                            <p class="fs-xxl-18 pe-xxl-5">{{ slide.description }}</p>
+                                            <div class="btn-wrap d-flex flex-wrap align-items-center">
+                                                <a href="{{ slide.link }}" class="btn style-two position-relative z-1 round-10">{{ slide.button_text }}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-6 mb-sm-30">
+                                        <div class="hero-img-wrap position-relative">
+                                            <img src="{{ slide.image.url }}" alt="Image" class="d-block mx-auto" data-cue="slideInUp">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            {% endfor %}
                         </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6 mb-sm-30">
-                            <div class="hero-img-wrap position-relative">
-                                <img src="{% static 'img/hero/hero-img-1.png' %}" alt="Image" class="d-block mx-auto" data-cue="slideInUp">
-                            </div>
-                        </div>
+                        <div class="swiper-pagination"></div>
                     </div>
                 </div>
             </section>
@@ -40,8 +49,9 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-2 col-md-6 col-6">
                         <div class="product-card style-four position-relative text-center img-hover-zoom round-20 mb-30 cursor-pointer" onclick="window.location.href='{% url 'products' %}';">
-                            <div class="product-img round-15">
-                                <img src="{% static 'img/products/gift/product-10.jpg' %}" alt="Image" class="round-15">
+                            <div class="product-img img-zoom position-relative overflow-hidden round-15">
+                                <img src="{% static 'img/products/gift/product-10.jpg' %}" alt="Image" class="position-absolute top-0 start-0 w-100 h-100 transition round-15">
+                                <img src="{% static 'img/products/gift/product-10.jpg' %}" alt="Image" class="transition round-15">
                             </div>
                             <ul class="rating list-unstyled mb-15">
                                 <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>

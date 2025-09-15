@@ -132,3 +132,33 @@ class Products(models.Model):
     class Meta:
         verbose_name_plural = 'Products'
         ordering = ['id']
+
+class Banner(models.Model):
+    title = models.CharField(max_length=255, blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = 'Banners'
+        ordering = ['created_at']
+
+    def __str__(self):
+        return self.title or "Banner #{}".format(self.id)
+
+class Slide(models.Model):
+    banner = models.ForeignKey(Banner, related_name='slides', on_delete=models.CASCADE)
+    title = models.CharField(max_length=255, blank=True, null=True)
+    subtitle = models.CharField(max_length=255, blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    button_text = models.CharField(max_length=255, blank=True, null=True)
+    link = models.CharField(max_length=255, blank=True, null=True)
+    order = models.PositiveIntegerField(default=0)  # To order the slides
+    image = models.ImageField(upload_to='slides/', blank=True, null=True)  # Image field
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['order', 'created_at']
+        verbose_name_plural = 'Slides'
+
+    def __str__(self):
+        return self.title or "Slide #{}".format(self.id)

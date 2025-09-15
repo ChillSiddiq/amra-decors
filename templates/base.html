@@ -265,5 +265,22 @@
     <script src="{% static 'js/customEase.js' %}"></script>
     <script src="{% static 'js/scrollcue.min.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
+
+    <script>
+    // Initialize Swiper for the hero section
+    var swiper = new Swiper('.swiper-container', {
+        loop: true,  // Make the slider loop
+        autoplay: {
+            delay: 5000,  // Auto-slide every 5 seconds
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,  // Allow users to click the pagination
+        },
+        slidesPerView: 1,  // Show one slide at a time
+        spaceBetween: 10,  // Space between slides
+    });
+</script>
+
 </body>
 </html>

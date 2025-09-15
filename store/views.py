@@ -2,15 +2,17 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 
 # Create your views here.
-from .models import Categories, Coupons, Roles, Profile, Products
+from .models import Categories, Coupons, Roles, Profile, Products, Banner
 
 def home_view(request):
     categories = Categories.objects.filter(active=True)
+    banner = Banner.objects.first()
 
     page_data = {
         'page_name': 'home',
-        'page_title': 'Amra Decorations | Transforming Ideas into Timeless Decor',
+        'page_title': 'Amra Decoration | Transforming Ideas into Timeless Decor',
         'categories': categories,
+        'banner': banner,
     }
 
     return render(request, 'home.html', page_data)

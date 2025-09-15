@@ -2,7 +2,7 @@ from django import forms
 from django.contrib import admin
 
 # Register your models here.
-from .models import Categories, Coupons, Roles, Profile, Products
+from .models import Categories, Coupons, Roles, Profile, Products, Slide, Banner
 
 class CategoriesAdmin(admin.ModelAdmin):
 	list_display = ('name', 'parent', 'active', 'menu', 'created_at')
@@ -93,6 +93,18 @@ class ProductsAdmin(admin.ModelAdmin):
         return ", ".join(category.name for category in obj.categories.all())
     get_categories.short_description = 'Categories'  # This sets the column header
 
+class SlideInline(admin.TabularInline):
+    model = Slide
+    extra = 1  # Number of empty slides to show by default
+    fields = ['title', 'subtitle', 'description', 'button_text', 'link', 'order', 'image']
+
+class BannerAdmin(admin.ModelAdmin):
+    list_display = ('title', 'description', 'created_at')
+    inlines = [SlideInline]
+
+# admin.site.register(Slide)
+
+admin.site.register(Banner, BannerAdmin)
 admin.site.register(Categories, CategoriesAdmin)
 # admin.site.register(Coupons, CouponsAdmin)
 admin.site.register(Roles, RolesAdmin)
