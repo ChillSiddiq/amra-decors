@@ -43,20 +43,20 @@
                                 <h3 class="sidebar-widget-title fs-20 fw-normal text-title mb-20">Product Category</h3>
                                 <ul class="list-unstyled mb-0">
                                 {% for category in categories %}
-                                    {% if category.parent == None %}
-                                        <li>
-                                            <a href="{% url 'products' category.slug %}" class="position-relative">{{ category.name }}</a>
-                                            {% if category.children.all %}
-                                                <ul class="list-unstyled ms-4">
-                                                    {% for subcategory in category.children.all %}
-                                                        <li style="margin-top: 20px;">
-                                                            <a href="{% url 'products' subcategory.slug %}" class="position-relative">{{ subcategory.name }}</a>
-                                                        </li>
-                                                    {% endfor %}
-                                                </ul>
-                                            {% endif %}
+                                {% if category.parent == None %}
+                                <li>
+                                    <a href="{% url 'products' category.slug %}" class="position-relative">{{ category.name }}</a>
+                                    {% if category.children.all %}
+                                    <ul class="list-unstyled ms-4">
+                                        {% for subcategory in category.children.all %}
+                                        <li style="margin-top: 20px;">
+                                            <a href="{% url 'products' subcategory.slug %}" class="position-relative">{{ subcategory.name }}</a>
                                         </li>
+                                        {% endfor %}
+                                    </ul>
                                     {% endif %}
+                                </li>
+                                {% endif %}
                                 {% endfor %}
                             </ul>
                             </div>

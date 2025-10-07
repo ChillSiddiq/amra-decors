@@ -3034,18 +3034,10 @@ img {vertical-align: middle;}
   border-radius: 50%;
   opacity: 1;
 }
-.testimonial-slider-one
-  .slider-pagination
-  .swiper-pagination-bullet.swiper-pagination-bullet-active,
-.testimonial-slider-four
-  .slider-pagination
-  .swiper-pagination-bullet.swiper-pagination-bullet-active,
-.product-slider-one
-  .slider-pagination
-  .swiper-pagination-bullet.swiper-pagination-bullet-active,
-.product-slider-two
-  .slider-pagination
-  .swiper-pagination-bullet.swiper-pagination-bullet-active {
+.testimonial-slider-one .slider-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active,
+.testimonial-slider-four .slider-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active,
+.product-slider-one .slider-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active,
+.product-slider-two .slider-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active {
   background-color: var(--secondaryColor);
   border-color: transparent;
 }
@@ -3814,9 +3806,7 @@ img {vertical-align: middle;}
   z-index: 1;
   text-align: right;
 }
-.testimonial-slider-one
-  .slider-pagination
-  .swiper-pagination-bullet.swiper-pagination-bullet-active {
+.testimonial-slider-one .slider-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active {
   background-color: var(--primaryColor);
   border-color: transparent;
 }

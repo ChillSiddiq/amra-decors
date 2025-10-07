@@ -91,9 +91,14 @@
 
   //Product Slider
   var product_sliderOne = new Swiper(".product-slider-one", {
-    loop: true,
+    // loop: true,
     speed: 1500,
     spaceBetween: 25,
+    autoplay: {
+      delay: 3000,         // Time between slides (in ms)
+      disableOnInteraction: false, // Keep autoplay active after interaction
+      pauseOnMouseEnter: true,     // Pause on hover
+    },
     pagination: {
       el: ".product-pagination",
       clickable: true,
@@ -102,18 +107,21 @@
       0: {
         slidesPerView: 1,
       },
-      768: {
+      420: {
         slidesPerView: 2,
       },
-      992: {
+      768: {
         slidesPerView: 3,
       },
-      1200: {
+      992: {
         slidesPerView: 4,
+      },
+      1200: {
+        slidesPerView: 5,
         spaceBetween: 25,
       },
       1400: {
-        slidesPerView: 4,
+        slidesPerView: 6,
         spaceBetween: 30,
       },
     },

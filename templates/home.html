@@ -63,23 +63,24 @@
             <!-- Hero Section End -->
 
             <!-- Product Section Start -->
-            <div class="container style-one pb-90">
-                <div class="row align-items-center mb-45">
-                    <div class="col-xl-6 mb-lg-20">
-                        <h2 class="section-title style-one fw-normal text-title mb-0">New Arrivals</h2>
-                    </div>
-                </div>
-                <div class="row">
-                    {% for product in all_products|slice:":10" %}
-                        <div class="col-lg-2 col-md-6 col-6">
+            <section class="product-area">
+                <div class="container style-one pb-90">
+                    <h2 class="section-title style-one fw-normal text-title text-center mb-45">New Arrivals</h2>
+                    <div class="product-slider-one swiper">
+                        <div class="swiper-wrapper">
+                            {% for product in all_products|slice:":10" %}
+                            <div class="swiper-slide">
                             {% include 'components/product.html' with product=product %}
+                            </div>
+                            {% endfor %}
                         </div>
-                    {% endfor %}
-                    <div class="col-xl-12 text-center">
+                        <div class="product-pagination slider-pagination style-one mt-0"></div>
+                    </div>
+                    <div class="col-xl-12 text-center mt-4">
                         <a href="{% url 'products' %}" class="btn style-two position-relative z-1 round-10">View All</a>
                     </div>
                 </div>
-            </div>
+            </section>
             <!-- Product Section End -->
 
             <!-- Featured Product Start -->
@@ -122,25 +123,26 @@
             <!-- Product Section Start -->
             {% for category in categories %}
             {% if category.ordered_products and category.parent == None %}
-            <div class="container style-one pb-90">
-                <div class="row align-items-center mb-45">
-                    <div class="col-xl-6 mb-lg-20">
-                        <h2 class="section-title style-one fw-normal text-title mb-0">{{ category.name }}</h2>
+            <section class="product-area">
+                <div class="container style-one pb-90">
+                    <h2 class="section-title style-one fw-normal text-title text-center mb-45">{{ category.name }}</h2>
+                    <div class="product-slider-one swiper">
+                        <div class="swiper-wrapper">
+                            {% for product in category.ordered_products|slice:":10" %}
+                            <div class="swiper-slide">
+                            {% include 'components/product.html' with product=product %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="product-pagination slider-pagination style-one mt-0"></div>
                     </div>
-                </div>
-                <div class="row">
-                    {% for product in category.ordered_products|slice:":10" %}
-                    <div class="col-lg-2 col-md-6 col-6">
-                        {% include 'components/product.html' with product=product %}
-                    </div>
-                    {% endfor %}
                     <div class="col-xl-12 text-center mt-4">
                         <a href="{% url 'products' category.slug %}" class="btn style-two position-relative z-1 round-10">
                             View All
                         </a>
                     </div>
                 </div>
-            </div>
+            </section>
             {% endif %}
             {% endfor %}
             <!-- Product Section End -->

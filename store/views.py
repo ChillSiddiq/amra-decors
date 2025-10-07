@@ -6,7 +6,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Categories, Coupons, Roles, Profile, Products, Banner
 
 def home_view(request):
-    all_products = Products.objects.filter(active=True).order_by('order')
+    all_products = Products.objects.filter(active=True).order_by('-id')
     categories = Categories.objects.filter(active=True).prefetch_related(
         Prefetch('products', queryset=all_products, to_attr='ordered_products')
     )
@@ -47,12 +47,12 @@ def products_view(request, slug=''):
     if slug:
         category = Categories.objects.filter(slug=slug).first()
         if category:
-            products = Products.objects.filter(categories__in=[category], active=True)
+            products = Products.objects.filter(categories__in=[category], active=True).order_by('-id')
             page_title = f'{category.name} | Amra Decorations'
         else:
             return redirect('products')
     else:
-        products = Products.objects.filter(active=True)
+        products = Products.objects.filter(active=True).order_by('-id')
         page_title = 'Products | Amra Decorations'
     
     categories = Categories.objects.filter(active=True)
