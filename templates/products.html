@@ -30,6 +30,10 @@
                             <div class="col-xl-4 col-lg-4 col-md-6 col-6">
                             	{% include 'components/product.html' with product=product %}
                             </div>
+                            {% empty %}
+                            <div class="col-12 text-center">
+                                <p>No products available at the moment.</p>
+                            </div>
                         	{% endfor %}
                         </div>
                     </div>
@@ -38,10 +42,23 @@
                             <div class="sidebar-widget category-widget round-20">
                                 <h3 class="sidebar-widget-title fs-20 fw-normal text-title mb-20">Product Category</h3>
                                 <ul class="list-unstyled mb-0">
-                                	{% for x in categories %}
-                                    <li><a href="{% url 'products' x.slug %}" class="position-relative">{{ x.name }}<img src="{% static 'img/icons/right-arrow-black.svg' %}" alt="Icon" class="transition"></a></li>
-                                	{% endfor %}
-                                </ul>
+                                {% for category in categories %}
+                                    {% if category.parent == None %}
+                                        <li>
+                                            <a href="{% url 'products' category.slug %}" class="position-relative">{{ category.name }}</a>
+                                            {% if category.children.all %}
+                                                <ul class="list-unstyled ms-4">
+                                                    {% for subcategory in category.children.all %}
+                                                        <li style="margin-top: 20px;">
+                                                            <a href="{% url 'products' subcategory.slug %}" class="position-relative">{{ subcategory.name }}</a>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
                             </div>
                         </aside>
                     </div>

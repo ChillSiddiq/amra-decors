@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import timedelta
 from django.utils import timezone
 from django.utils.text import slugify
 from django.contrib.auth.models import User
@@ -128,6 +129,10 @@ class Products(models.Model):
 
     def get_price(self):
         return self.discount_price if self.discount_price else self.price
+    
+    @property
+    def is_new(self):
+        return self.created_at >= timezone.now() - timedelta(days=7)
 
     class Meta:
         verbose_name_plural = 'Products'

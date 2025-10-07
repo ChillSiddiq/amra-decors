@@ -105,10 +105,19 @@
                                     <button type="button" class="menu-mobile-close bg-transparent border-0"><i class="ri-close-line"></i></button>
                                 </div>
                                 <ul class="menu-section p-0 mb-0 lh-1">
-                                    {% for x in categories %}
-                                    {% if x.menu %}
-                                    <li><a href="{% url 'products' x.slug %}">{{ x.name }}</a></li>
-                                    {% endif %} 
+                                    {% for category in categories %}
+                                    {% if category.menu and category.parent == None %}
+                                    <li>
+                                        <a href="{% url 'products' category.slug %}" class="position-relative">{{ category.name }} {% if category.children.all %}<i class="ri-add-line"></i>{% endif %}</a>
+                                        {% if category.children.all %}
+                                        <ul class="menu-subs menu-column-1">
+                                            {% for subcategory in category.children.all %}
+                                            <li><a href="{% url 'products' subcategory.slug %}">{{ subcategory.name }}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                        {% endif %}
+                                    </li>
+                                    {% endif %}
                                     {% endfor %}
                                     <li><a href="{% url 'contact' %}">Contact</a></li>
                                 </ul>
@@ -312,7 +321,7 @@
         }
 
         showSlides(slideIndex);
-        startAutoplay();
+        // startAutoplay();
     </script>
 
 </body>
