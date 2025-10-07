@@ -55,12 +55,14 @@
                 {% endfor %}
             </div>
 
-            <div class="slideshow-pagination pb-120">
+            <div class="slideshow-pagination">
                 {% for slide in banner.slides.all %}
                 <span class="dot" onclick="currentSlide({{ forloop.counter }})"></span>
                 {% endfor %}
             </div>
             <!-- Hero Section End -->
+            
+            <div class="pb-120"></div>
 
             <!-- Product Section Start -->
             <section class="product-area">
@@ -124,7 +126,7 @@
             {% for category in categories %}
             {% if category.ordered_products and category.parent == None %}
             <section class="product-area">
-                <div class="container style-one pb-90">
+                <div class="container style-one pb-120">
                     <h2 class="section-title style-one fw-normal text-title text-center mb-45">{{ category.name }}</h2>
                     <div class="product-slider-one swiper">
                         <div class="swiper-wrapper">

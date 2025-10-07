@@ -2104,11 +2104,16 @@ img {vertical-align: middle;}
 }
 
 .single-slide {
+  cursor: grab;
   display: flex;
   justify-content: center;       /* Center horizontally */
   align-items: center;           /* Center vertically */
   height: 80vh;                 /* Or 100vh or desired height */
   box-sizing: border-box;
+}
+
+.single-slide:active {
+  cursor: grabbing; /* Change cursor to indicate dragging */
 }
 
 .image-container,
@@ -2191,17 +2196,23 @@ img {vertical-align: middle;}
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
   .slideshow-container,
   .single-slide {
-      height: 400px;
+    height: 400px;
+  }
+  .slideshow-pagination {
+    margin-top: -40px;
   }
 }
 
 /* For mobile and smaller tablets */
 @media only screen and (max-width: 600px) {
   .prev, .next, .text {
-      font-size: 11px;
+    font-size: 11px;
   }
   .slideshow-container, .single-slide {
-      height: 200px;
+    height: 200px;
+  }
+  .slideshow-pagination {
+    margin-top: -30px;
   }
 }
 
@@ -2209,7 +2220,10 @@ img {vertical-align: middle;}
 @media only screen and (max-width: 320px) {
   .slideshow-container,
   .single-slide {
-      height: 180px;
+    height: 180px;
+  }
+  .slideshow-pagination {
+    margin-top: -30px;
   }
 }
 

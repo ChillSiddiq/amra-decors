@@ -692,6 +692,12 @@
   document.addEventListener("DOMContentLoaded", function () {
     const popup = document.getElementById("newsletter-popup");
     const overlay = document.getElementById("popup-overlay");
+    
+    // Only proceed if the necessary elements exist
+    if (!popup || !overlay) {
+      return;
+    }
+    
     const closeBtn = popup.querySelector(".close-btn");
     const checkbox = document.getElementById("dont-show-again");
 
@@ -869,37 +875,42 @@ var cursor = document.querySelector(".cursor");
 var cursorinner = document.querySelector(".cursor-inner");
 var a = document.querySelectorAll("a");
 
-document.addEventListener("mousemove", function (e) {
-  var x = e.clientX;
-  var y = e.clientY;
-  cursor.style.transform = `translate3d(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%), 0)`;
-});
-
-document.addEventListener("mousemove", function (e) {
-  var x = e.clientX;
-  var y = e.clientY;
-  cursorinner.style.left = x + "px";
-  cursorinner.style.top = y + "px";
-});
-
-document.addEventListener("mousedown", function () {
-  cursor.classList.add("click");
-  cursorinner.classList.add("cursorinnerhover");
-});
-
-document.addEventListener("mouseup", function () {
-  cursor.classList.remove("click");
-  cursorinner.classList.remove("cursorinnerhover");
-});
-
-a.forEach((item) => {
-  item.addEventListener("mouseover", () => {
-    cursor.classList.add("hover");
+// Ensure cursor elements exist before adding event listeners
+if (cursor && cursorinner) {
+  document.addEventListener("mousemove", function (e) {
+    var x = e.clientX;
+    var y = e.clientY;
+    cursor.style.transform = `translate3d(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%), 0)`;
+    cursorinner.style.left = x + "px";
+    cursorinner.style.top = y + "px";
   });
-  item.addEventListener("mouseleave", () => {
-    cursor.classList.remove("hover");
+
+  document.addEventListener("mousedown", function () {
+    cursor.classList.add("click");
+    cursorinner.classList.add("cursorinnerhover");
   });
-});
+
+  document.addEventListener("mouseup", function () {
+    cursor.classList.remove("click");
+    cursorinner.classList.remove("cursorinnerhover");
+  });
+}
+
+// Mouse hover effect on anchor links
+if (a.length > 0) {
+  a.forEach((item) => {
+    item.addEventListener("mouseover", () => {
+      if (cursor) {
+        cursor.classList.add("hover");
+      }
+    });
+    item.addEventListener("mouseleave", () => {
+      if (cursor) {
+        cursor.classList.remove("hover");
+      }
+    });
+  });
+}
 try {
   // function to set a given theme/color-scheme
   function setTheme(themeName) {
