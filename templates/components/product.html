@@ -1,0 +1,22 @@
+{% load static %}
+<div class="product-card style-four position-relative text-center img-hover-zoom round-20 mb-30" onclick="window.location.href='{% url 'product-detail' product.id %}';">
+    <div class="product-img round-15">
+        {% if product.image %}
+        <img src="{{ product.image.url }}" alt="Image" class="round-15">
+        {% endif %}
+        <div class="add-to-wishlist rounded-circle position-absolute border-0">New</div>
+    </div>
+    <ul class="rating list-unstyled mb-15">
+        <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
+        <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
+        <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
+        <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
+        <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
+    </ul>
+    <h3 class="fs-24"><a href="{% url 'product-detail' product.id %}" class="text-title link-hover-primary">{{ product.name }} {{ product.order }}</a></h3>
+    {% if product.discount_price %}
+    <div class="product-price fs-xxl-18 d-block"><span class="fw-normal text_primary fs-24">₹{{ product.discount_price }}</span> <span class="text-para fw-light text-decoration-line-through ms-2 fs-20">₹{{ product.price }}</span></div>
+    {% else %}
+    <div class="product-price fs-xxl-18 d-block"><span class="fw-normal text_primary fs-24">₹{{ product.price }}</span></div>
+    {% endif %}
+</div>

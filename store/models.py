@@ -146,7 +146,13 @@ class Banner(models.Model):
         return self.title or "Banner #{}".format(self.id)
 
 class Slide(models.Model):
+    TYPES = [
+        ('default', 'Default'),
+        ('image', 'Image'),
+        ('video', 'Video'),
+    ]
     banner = models.ForeignKey(Banner, related_name='slides', on_delete=models.CASCADE)
+    type = models.CharField(max_length=255, choices=TYPES, default="default")
     title = models.CharField(max_length=255, blank=True, null=True)
     subtitle = models.CharField(max_length=255, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
@@ -154,6 +160,7 @@ class Slide(models.Model):
     link = models.CharField(max_length=255, blank=True, null=True)
     order = models.PositiveIntegerField(default=0)  # To order the slides
     image = models.ImageField(upload_to='slides/', blank=True, null=True)  # Image field
+    video = models.FileField(upload_to='videos/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

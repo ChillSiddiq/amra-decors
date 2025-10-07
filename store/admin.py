@@ -102,9 +102,36 @@ class BannerAdmin(admin.ModelAdmin):
     list_display = ('title', 'description', 'created_at')
     inlines = [SlideInline]
 
-# admin.site.register(Slide)
+class SlideAdmin(admin.ModelAdmin):
+    list_display = ('title', 'type', 'order', 'created_at')
+    search_fields = ('title', 'type',)
 
-admin.site.register(Banner, BannerAdmin)
+    def get_fieldsets(self, request, obj=None):
+        common_fields = ('type', 'title', 'order')
+
+        if obj:
+            if obj.type == 'default':
+                return (
+                    (None, {'fields': common_fields + (
+                        'title', 'subtitle', 'description', 'button_text', 'link', 'image'
+                    )}),
+                )
+            elif obj.type == 'image':
+                return ((None, {'fields': common_fields + ('image', 'link')}),)
+            elif obj.type == 'video':
+                return ((None, {'fields': common_fields + ('video',)}),)
+
+        # Fallback during creation: only show 'type'
+        return ((None, {'fields': ('type', 'title', 'order')}),)
+    
+    def save_model(self, request, obj, form, change):
+        if not obj.banner_id:
+            obj.banner_id = 1
+        super().save_model(request, obj, form, change)
+
+admin.site.register(Slide, SlideAdmin)
+
+# admin.site.register(Banner, BannerAdmin)
 admin.site.register(Categories, CategoriesAdmin)
 # admin.site.register(Coupons, CouponsAdmin)
 admin.site.register(Roles, RolesAdmin)

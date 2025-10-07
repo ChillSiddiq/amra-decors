@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /*
-@File: PinkBakery Template Styles
+@File: Amra Decoration Template Styles
 
 * This file contains the styling for the actual template, this
 is the file you need to edit to change the look of the
@@ -49,7 +49,7 @@ This files table contents are outlined below>>>>>
   --primaryFont: "Outfit", sans-serif;
   --secondaryFont: "Rowdies", sans-serif;
   /* --primaryColor: #F83D8E; */
-  --primaryColor: #d6bd7b;
+  --primaryColor: #761e23;
   /* --secondaryColor: #683292; */
   --secondaryColor: #d6997b;
   --pinkColor: #fadafa;
@@ -1798,9 +1798,22 @@ body {
 /*------------------------------------------------
         Hero Section CSS
 ------------------------------------------------*/
+.swiper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.swiper-slide {
+  width: 100%;
+  height: auto;
+}
+.swiper-pagination {
+  bottom: 10px;
+  text-align: center;
+}
 .hero-area.style-one {
   background-color: #faf2e7;
-  padding: 75px 0;
+  /* padding: 75px 0; */
 }
 .hero-area.style-one .hero-content h1 {
   font-size: 70px;
@@ -2694,8 +2707,9 @@ body {
   width: 50px;
   height: 50px;
   border-radius: 10px;
-  background-color: var(--whiteColor);
+  background-color: var(--primaryColor);
   transition: var(--transition);
+  color: var(--whiteColor);
 }
 .product-card.style-four .product-img .add-to-wishlist i {
   color: var(--titleColor);

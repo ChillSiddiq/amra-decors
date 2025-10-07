@@ -1,3 +1,4 @@
+from django.db.models import Prefetch
 from django.shortcuts import render, get_object_or_404, redirect
 
 
@@ -5,13 +6,17 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Categories, Coupons, Roles, Profile, Products, Banner
 
 def home_view(request):
-    categories = Categories.objects.filter(active=True)
+    all_products = Products.objects.filter(active=True).order_by('order')
+    categories = Categories.objects.filter(active=True).prefetch_related(
+        Prefetch('products', queryset=all_products, to_attr='ordered_products')
+    )
     banner = Banner.objects.first()
 
     page_data = {
         'page_name': 'home',
         'page_title': 'Amra Decoration | Transforming Ideas into Timeless Decor',
         'categories': categories,
+        'all_products': all_products,
         'banner': banner,
     }
 

@@ -5,38 +5,61 @@
 
 {% block content %}
 			<!-- Hero Section Start -->
-            <section class="hero-area style-one position-relative z-1">
-                <img src="{% static 'img/hero/dot-shape.svg' %}" alt="Shape" class="hero-dots position-absolute top-0 start-0 w-100 h-100 z-n1">
-                <img src="{% static 'img/bottom-zigzag-shape.svg' %}" alt="Shape" class="bottom-shape position-absolute bottom-0 start-0 w-100 z-n1">
-                <div class="container style-one">
-                    <div class="swiper swiper-container">
-                        <div class="swiper-wrapper">
-                            {% for slide in banner.slides.all %}
-                            <div class="swiper-slide d-flex align-items-center">
-                                <div class="row align-items-center">
-                                    <div class="col-xl-8 col-lg-8 pe-xxl-5">
-                                        <div class="hero-content mb-lg-30">
-                                            <h6 class="section-subtile fs-xxl-20 fw-light text_primary mb-6">{{ slide.subtitle }}</h6>
-                                            <h1>{{ slide.title }}</h1>
-                                            <p class="fs-xxl-18 pe-xxl-5">{{ slide.description }}</p>
-                                            <div class="btn-wrap d-flex flex-wrap align-items-center">
-                                                <a href="{{ slide.link }}" class="btn style-two position-relative z-1 round-10">{{ slide.button_text }}</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-4 col-lg-4 col-md-6 mb-sm-30">
-                                        <div class="hero-img-wrap position-relative">
-                                            <img src="{{ slide.image.url }}" alt="Image" class="d-block mx-auto" data-cue="slideInUp">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {% endfor %}
-                        </div>
-                        <div class="swiper-pagination"></div>
+            <div class="slideshow-container">
+                <img src="{% static 'img/bottom-zigzag-shape.svg' %}" alt="Shape" class="bottom-shape position-absolute bottom-0 start-0 w-100 z-1">
+                {% for slide in banner.slides.all %}
+                {% if slide.type == 'image' %}
+                <div class="single-slide">
+                    <div class="image-container">
+                        <a href="{{ slide.link }}">
+                            <img src="{{ slide.image.url }}" alt="Full Image Slide" class="img-fluid w-100" data-cue="slideInUp">
+                        </a>
                     </div>
                 </div>
-            </section>
+                {% elif slide.type == 'video' %}
+                <div class="single-slide">
+                    <div class="video-container position-relative w-100" style="padding-top: 56.25%;" data-cue="fadeIn">
+                        <video 
+                            class="position-absolute top-0 start-0 w-100 h-100"
+                            autoplay
+                            muted
+                            loop
+                            playsinline
+                        >
+                            <source src="{{ slide.video.url }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+                {% elif slide.type == 'default' %}
+                <div class="single-slide">
+                    <div class="row align-items-center pe-5 ps-5">
+                        <div class="col-xl-8 col-lg-8 pe-xxl-5">
+                            <div class="hero-content mb-lg-30">
+                                <h6 class="section-subtile fs-xxl-20 fw-light text_primary mb-6">{{ slide.subtitle }}</h6>
+                                <h1>{{ slide.title }}</h1>
+                                <p class="fs-xxl-18 pe-xxl-5">{{ slide.description }}</p>
+                                <div class="btn-wrap d-flex flex-wrap align-items-center">
+                                    <a href="{{ slide.link }}" class="btn style-two position-relative z-1 round-10">{{ slide.button_text }}</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 mb-sm-30">
+                            <div class="hero-img-wrap position-relative">
+                                <img src="{{ slide.image.url }}" alt="Image" class="d-block mx-auto" data-cue="slideInUp">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="slideshow-pagination">
+                {% for slide in banner.slides.all %}
+                <span class="dot" onclick="currentSlide({{ forloop.counter }})"></span>
+                {% endfor %}
+            </div>
             <!-- Hero Section End -->
 
             <!-- Product Section Start -->
@@ -46,106 +69,14 @@
                         <h2 class="section-title style-one fw-normal text-title mb-0">New Arrivals</h2>
                     </div>
                 </div>
-                <div class="row justify-content-center">
-                    <div class="col-lg-2 col-md-6 col-6">
-                        <div class="product-card style-four position-relative text-center img-hover-zoom round-20 mb-30 cursor-pointer" onclick="window.location.href='{% url 'products' %}';">
-                            <div class="product-img img-zoom position-relative overflow-hidden round-15">
-                                <img src="{% static 'img/products/gift/product-10.jpg' %}" alt="Image" class="position-absolute top-0 start-0 w-100 h-100 transition round-15">
-                                <img src="{% static 'img/products/gift/product-10.jpg' %}" alt="Image" class="transition round-15">
-                            </div>
-                            <ul class="rating list-unstyled mb-15">
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                            </ul>
-                            <h3 class="fs-24"><a href="{% url 'product-detail' %}" class="text-title link-hover-primary">Box With Card</a></h3>
-                            <span class="product-price fs-xxl-18 d-block">₹4.85</span>
+                <div class="row">
+                    {% for product in all_products|slice:":10" %}
+                        <div class="col-lg-2 col-md-6 col-6">
+                            {% include 'components/product.html' with product=product %}
                         </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-6">
-                        <div class="product-card style-four position-relative text-center img-hover-zoom round-20 mb-30 cursor-pointer" onclick="window.location.href='{% url 'products' %}';">
-                            <div class="product-img round-15">
-                                <img src="{% static 'img/products/gift/product-11.jpg' %}" alt="Image" class="round-15">
-                            </div>
-                            <ul class="rating list-unstyled mb-15">
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                            </ul>
-                            <h3 class="fs-24"><a href="{% url 'product-detail' %}" class="text-title link-hover-primary">Christmas Gift</a></h3>
-                            <span class="product-price fs-xxl-18 d-block">₹65.00</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-6">
-                        <div class="product-card style-four position-relative text-center img-hover-zoom round-20 mb-30 cursor-pointer" onclick="window.location.href='{% url 'products' %}';">
-                            <div class="product-img round-15">
-                                <img src="{% static 'img/products/gift/product-12.jpg' %}" alt="Image" class="round-15">
-                            </div>
-                            <ul class="rating list-unstyled mb-15">
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                            </ul>
-                            <h3 class="fs-24"><a href="{% url 'product-detail' %}" class="text-title link-hover-primary">Box With Bow</a></h3>
-                            <span class="product-price fs-xxl-18 d-block">₹60.00</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-6">
-                        <div class="product-card style-four position-relative text-center img-hover-zoom round-20 mb-30 cursor-pointer" onclick="window.location.href='{% url 'products' %}';">
-                            <div class="product-img round-15">
-                                <img src="{% static 'img/products/gift/product-13.jpg' %}" alt="Image" class="round-15">
-                            </div>
-                            <ul class="rating list-unstyled mb-15">
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                            </ul>
-                            <h3 class="fs-24"><a href="{% url 'product-detail' %}" class="text-title link-hover-primary">Box With Bottle</a></h3>
-                            <span class="product-price fs-xxl-18 d-block">₹40.00</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-6">
-                        <div class="product-card style-four position-relative text-center img-hover-zoom round-20 mb-30 cursor-pointer" onclick="window.location.href='{% url 'products' %}';">
-                            <div class="product-img round-15">
-                                <img src="{% static 'img/products/gift/product-10.jpg' %}" alt="Image" class="round-15">
-                            </div>
-                            <ul class="rating list-unstyled mb-15">
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                            </ul>
-                            <h3 class="fs-24"><a href="{% url 'product-detail' %}" class="text-title link-hover-primary">Box With Card</a></h3>
-                            <span class="product-price fs-xxl-18 d-block">₹4.85</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-6">
-                        <div class="product-card style-four position-relative text-center img-hover-zoom round-20 mb-30 cursor-pointer" onclick="window.location.href='{% url 'products' %}';">
-                            <div class="product-img round-15">
-                                <img src="{% static 'img/products/gift/product-11.jpg' %}" alt="Image" class="round-15">
-                            </div>
-                            <ul class="rating list-unstyled mb-15">
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                            </ul>
-                            <h3 class="fs-24"><a href="{% url 'product-detail' %}" class="text-title link-hover-primary">Christmas Gift</a></h3>
-                            <span class="product-price fs-xxl-18 d-block">₹65.00</span>
-                        </div>
-                    </div>
+                    {% endfor %}
                     <div class="col-xl-12 text-center">
-                        <a href="{% url 'products' 'new-arrivals' %}" class="btn style-two position-relative z-1 round-10">View All</a>
+                        <a href="{% url 'products' %}" class="btn style-two position-relative z-1 round-10">View All</a>
                     </div>
                 </div>
             </div>
@@ -187,288 +118,30 @@
                 </div>
             </section>
             <!-- Featured Product End -->
-
-            <!-- Product Section Start -->
-            <div class="container style-one pt-120 pb-90">
-                <div class="row align-items-center mb-45">
-                    <div class="col-xl-6 mb-lg-20">
-                        <h2 class="section-title style-one fw-normal text-title mb-0">Sale/Offer Products</h2>
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-lg-2 col-md-6 col-6">
-                        <div class="product-card style-four position-relative text-center img-hover-zoom round-20 mb-30 cursor-pointer" onclick="window.location.href='{% url 'products' %}';">
-                            <div class="product-img round-15">
-                                <img src="{% static 'img/products/gift/product-10.jpg' %}" alt="Image" class="round-15">
+            
+            {% for category in categories %}
+                {% if category.ordered_products %}
+                    <div class="container style-one pt-120 pb-90">
+                        <div class="row align-items-center mb-45">
+                            <div class="col-xl-6 mb-lg-20">
+                                <h2 class="section-title style-one fw-normal text-title mb-0">{{ category.name }}</h2>
                             </div>
-                            <ul class="rating list-unstyled mb-15">
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                            </ul>
-                            <h3 class="fs-24"><a href="{% url 'product-detail' %}" class="text-title link-hover-primary">Box With Card</a></h3>
-                            <span class="product-price fs-xxl-18 d-block">₹4.85</span>
                         </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-6">
-                        <div class="product-card style-four position-relative text-center img-hover-zoom round-20 mb-30 cursor-pointer" onclick="window.location.href='{% url 'products' %}';">
-                            <div class="product-img round-15">
-                                <img src="{% static 'img/products/gift/product-11.jpg' %}" alt="Image" class="round-15">
-                            </div>
-                            <ul class="rating list-unstyled mb-15">
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                            </ul>
-                            <h3 class="fs-24"><a href="{% url 'product-detail' %}" class="text-title link-hover-primary">Christmas Gift</a></h3>
-                            <span class="product-price fs-xxl-18 d-block">₹65.00</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-6">
-                        <div class="product-card style-four position-relative text-center img-hover-zoom round-20 mb-30 cursor-pointer" onclick="window.location.href='{% url 'products' %}';">
-                            <div class="product-img round-15">
-                                <img src="{% static 'img/products/gift/product-12.jpg' %}" alt="Image" class="round-15">
-                            </div>
-                            <ul class="rating list-unstyled mb-15">
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                            </ul>
-                            <h3 class="fs-24"><a href="{% url 'product-detail' %}" class="text-title link-hover-primary">Box With Bow</a></h3>
-                            <span class="product-price fs-xxl-18 d-block">₹60.00</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-6">
-                        <div class="product-card style-four position-relative text-center img-hover-zoom round-20 mb-30 cursor-pointer" onclick="window.location.href='{% url 'products' %}';">
-                            <div class="product-img round-15">
-                                <img src="{% static 'img/products/gift/product-13.jpg' %}" alt="Image" class="round-15">
-                            </div>
-                            <ul class="rating list-unstyled mb-15">
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                            </ul>
-                            <h3 class="fs-24"><a href="{% url 'product-detail' %}" class="text-title link-hover-primary">Box With Bottle</a></h3>
-                            <span class="product-price fs-xxl-18 d-block">₹40.00</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-6">
-                        <div class="product-card style-four position-relative text-center img-hover-zoom round-20 mb-30 cursor-pointer" onclick="window.location.href='{% url 'products' %}';">
-                            <div class="product-img round-15">
-                                <img src="{% static 'img/products/gift/product-10.jpg' %}" alt="Image" class="round-15">
-                            </div>
-                            <ul class="rating list-unstyled mb-15">
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                            </ul>
-                            <h3 class="fs-24"><a href="{% url 'product-detail' %}" class="text-title link-hover-primary">Box With Card</a></h3>
-                            <span class="product-price fs-xxl-18 d-block">₹4.85</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-6">
-                        <div class="product-card style-four position-relative text-center img-hover-zoom round-20 mb-30 cursor-pointer" onclick="window.location.href='{% url 'products' %}';">
-                            <div class="product-img round-15">
-                                <img src="{% static 'img/products/gift/product-11.jpg' %}" alt="Image" class="round-15">
-                            </div>
-                            <ul class="rating list-unstyled mb-15">
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                            </ul>
-                            <h3 class="fs-24"><a href="{% url 'product-detail' %}" class="text-title link-hover-primary">Christmas Gift</a></h3>
-                            <span class="product-price fs-xxl-18 d-block">₹65.00</span>
-                        </div>
-                    </div>
-                    <div class="col-xl-12 text-center">
-                        <a href="{% url 'products' 'sale-offer-products' %}" class="btn style-two position-relative z-1 round-10">View All</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Product Section End -->
-
-            <!-- About Section Start -->
-            <section class="about-area style-three position-relative z-1 pb-90">
-                <div class="container style-one">
-                    <div class="row align-items-center">
-                        <div class="col-lg-6">
-                            <div class="about-img-wrap position-relative mb-md-30">
-                                <div class="about-img-one d-inline-block round-20">
-                                    <img src="{% static 'img/about/about-img-3.jpg' %}" alt="Image" class="round-20">
+                        <div class="row">
+                            {% for product in category.ordered_products|slice:":10" %}
+                                <div class="col-lg-2 col-md-6 col-6">
+                                    {% include 'components/product.html' with product=product %}
                                 </div>
-                                <div class="about-img-two d-inline-block position-absolute round-20">
-                                    <img src="{% static 'img/about/about-img-4.jpg' %}" alt="Image" class="round-20">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 ps-xxl-4 ps-xl-4">
-                            <div class="about-content">
-                                <h2 class="section-title style-one fw-normal text-title mb-15">We at Amra Decorations</h2>
-                                <p>From locally made crafts and delicious treats to stylish accessories and unique treasures collection is designed to make giving feel just as good as receiving come explore and let us help</p>
-                                <ul class="feature-list style-one d-flex flex-wrap list-unstyled mb-18">
-                                    <li class="position-relative font-secondary fw-normal fs-xxl-18 text-title"><img src="{% static 'img/icons/badge-violet.svg' %}" alt="Icon">The atmosphere is perfect</li>
-                                    <li class="position-relative font-secondary fw-normal fs-xxl-18 text-title"><img src="{% static 'img/icons/badge-violet.svg' %}" alt="Icon">We offer something unique</li>
-                                </ul>
-                                <div class="counter-card-wrap d-flex flex-wrap justify-content-between round-15 mb-45">
-                                    <div class="counter-card style-one position-relative mb-25">
-                                        <h4 class="fw-normal fs-36 text-title mb-10"><span class="transition">50</span>+</h4>
-                                        <p class="fs-xxl-18 fw-normal d-block mb-0">Team Members</p>
-                                    </div>
-                                    <div class="counter-card style-one position-relative mb-25">
-                                        <h4 class="fw-normal fs-36 text-title mb-10"><span class="transition">38</span>+</h4>
-                                        <p class="fs-xxl-18 fw-normal d-block mb-0">World Outlet</p>
-                                    </div>
-                                    <div class="counter-card style-one position-relative mb-25">
-                                        <h4 class="fw-normal fs-36 text-title mb-10"><span class="transition">100</span>%</h4>
-                                        <p class="fs-xxl-18 fw-normal d-block mb-0">Customer Satisfaction</p>
-                                    </div>
-                                </div>
+                            {% endfor %}
+                            <div class="col-xl-12 text-center mt-4">
+                                <a href="{% url 'products' category.slug %}" class="btn style-two position-relative z-1 round-10">
+                                    View All
+                                </a>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
-            <!-- About Section End -->
-
-            <!-- Scrolling Text Start -->
-            <div class="move-text-wrapper overflow-hidden pt-120 pb-120" style="background: #f7f2ea">
-                <div class="move-text style-one position-relative z-1">
-                    <ul class="d-flex align-items-center list-unstyled mb-0">
-                        <li class="font-secondary text-title">Best Quality</li>
-                        <li class="font-secondary text-title">Natural Ingredients</li>
-                        <li class="font-secondary text-title">Crafted With Love</li>
-                        <li class="font-secondary text-title">Gourmet Treats</li>
-                        <li class="font-secondary text-title">Best Quality</li>
-                        <li class="font-secondary text-title">Natural Ingredients</li>
-                        <li class="font-secondary text-title">Crafted With Love</li>
-                        <li class="font-secondary text-title">Gourmet Treats</li>
-                    </ul>
-                </div>
-            </div>
-            <!-- Scrolling Text End -->
-
-            <!-- Product Section Start -->
-            <div class="container style-one pt-120 pb-90">
-                <div class="row align-items-center mb-45">
-                    <div class="col-xl-6 mb-lg-20">
-                        <h2 class="section-title style-one fw-normal text-title mb-0">Wedding Props/Decorations</h2>
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-lg-2 col-md-6 col-6">
-                        <div class="product-card style-four position-relative text-center img-hover-zoom round-20 mb-30 cursor-pointer" onclick="window.location.href='{% url 'products' %}';">
-                            <div class="product-img round-15">
-                                <img src="{% static 'img/products/gift/product-10.jpg' %}" alt="Image" class="round-15">
-                            </div>
-                            <ul class="rating list-unstyled mb-15">
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                            </ul>
-                            <h3 class="fs-24"><a href="{% url 'product-detail' %}" class="text-title link-hover-primary">Box With Card</a></h3>
-                            <span class="product-price fs-xxl-18 d-block">₹4.85</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-6">
-                        <div class="product-card style-four position-relative text-center img-hover-zoom round-20 mb-30 cursor-pointer" onclick="window.location.href='{% url 'products' %}';">
-                            <div class="product-img round-15">
-                                <img src="{% static 'img/products/gift/product-11.jpg' %}" alt="Image" class="round-15">
-                            </div>
-                            <ul class="rating list-unstyled mb-15">
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                            </ul>
-                            <h3 class="fs-24"><a href="{% url 'product-detail' %}" class="text-title link-hover-primary">Christmas Gift</a></h3>
-                            <span class="product-price fs-xxl-18 d-block">₹65.00</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-6">
-                        <div class="product-card style-four position-relative text-center img-hover-zoom round-20 mb-30 cursor-pointer" onclick="window.location.href='{% url 'products' %}';">
-                            <div class="product-img round-15">
-                                <img src="{% static 'img/products/gift/product-12.jpg' %}" alt="Image" class="round-15">
-                            </div>
-                            <ul class="rating list-unstyled mb-15">
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                            </ul>
-                            <h3 class="fs-24"><a href="{% url 'product-detail' %}" class="text-title link-hover-primary">Box With Bow</a></h3>
-                            <span class="product-price fs-xxl-18 d-block">₹60.00</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-6">
-                        <div class="product-card style-four position-relative text-center img-hover-zoom round-20 mb-30 cursor-pointer" onclick="window.location.href='{% url 'products' %}';">
-                            <div class="product-img round-15">
-                                <img src="{% static 'img/products/gift/product-13.jpg' %}" alt="Image" class="round-15">
-                            </div>
-                            <ul class="rating list-unstyled mb-15">
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                            </ul>
-                            <h3 class="fs-24"><a href="{% url 'product-detail' %}" class="text-title link-hover-primary">Box With Bottle</a></h3>
-                            <span class="product-price fs-xxl-18 d-block">₹40.00</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-6">
-                        <div class="product-card style-four position-relative text-center img-hover-zoom round-20 mb-30 cursor-pointer" onclick="window.location.href='{% url 'products' %}';">
-                            <div class="product-img round-15">
-                                <img src="{% static 'img/products/gift/product-10.jpg' %}" alt="Image" class="round-15">
-                            </div>
-                            <ul class="rating list-unstyled mb-15">
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                            </ul>
-                            <h3 class="fs-24"><a href="{% url 'product-detail' %}" class="text-title link-hover-primary">Box With Card</a></h3>
-                            <span class="product-price fs-xxl-18 d-block">₹4.85</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-6">
-                        <div class="product-card style-four position-relative text-center img-hover-zoom round-20 mb-30 cursor-pointer" onclick="window.location.href='{% url 'products' %}';">
-                            <div class="product-img round-15">
-                                <img src="{% static 'img/products/gift/product-11.jpg' %}" alt="Image" class="round-15">
-                            </div>
-                            <ul class="rating list-unstyled mb-15">
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                            </ul>
-                            <h3 class="fs-24"><a href="{% url 'product-detail' %}" class="text-title link-hover-primary">Christmas Gift</a></h3>
-                            <span class="product-price fs-xxl-18 d-block">₹65.00</span>
-                        </div>
-                    </div>
-                    <div class="col-xl-12 text-center">
-                        <a href="{% url 'products' 'wedding-props-decorations' %}" class="btn style-two position-relative z-1 round-10">View All</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Product Section End -->
+                {% endif %}
+            {% endfor %}
 
             <!-- Testimonial Section Start -->
             <div class="testimonial-area style-three bg-black ptb-120">
@@ -579,115 +252,4 @@
                 </div>
             </div>
             <!-- Testimonial Section End -->
-
-            <!-- Product Section Start -->
-            <div class="container style-one pt-120 pb-90">
-                <div class="row align-items-center mb-45">
-                    <div class="col-xl-6 mb-lg-20">
-                        <h2 class="section-title style-one fw-normal text-title mb-0">Festival Decorations</h2>
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-lg-2 col-md-6 col-6">
-                        <div class="product-card style-four position-relative text-center img-hover-zoom round-20 mb-30 cursor-pointer" onclick="window.location.href='{% url 'products' %}';">
-                            <div class="product-img round-15">
-                                <img src="{% static 'img/products/gift/product-10.jpg' %}" alt="Image" class="round-15">
-                            </div>
-                            <ul class="rating list-unstyled mb-15">
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                            </ul>
-                            <h3 class="fs-24"><a href="{% url 'product-detail' %}" class="text-title link-hover-primary">Box With Card</a></h3>
-                            <span class="product-price fs-xxl-18 d-block">₹4.85</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-6">
-                        <div class="product-card style-four position-relative text-center img-hover-zoom round-20 mb-30 cursor-pointer" onclick="window.location.href='{% url 'products' %}';">
-                            <div class="product-img round-15">
-                                <img src="{% static 'img/products/gift/product-11.jpg' %}" alt="Image" class="round-15">
-                            </div>
-                            <ul class="rating list-unstyled mb-15">
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                            </ul>
-                            <h3 class="fs-24"><a href="{% url 'product-detail' %}" class="text-title link-hover-primary">Christmas Gift</a></h3>
-                            <span class="product-price fs-xxl-18 d-block">₹65.00</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-6">
-                        <div class="product-card style-four position-relative text-center img-hover-zoom round-20 mb-30 cursor-pointer" onclick="window.location.href='{% url 'products' %}';">
-                            <div class="product-img round-15">
-                                <img src="{% static 'img/products/gift/product-12.jpg' %}" alt="Image" class="round-15">
-                            </div>
-                            <ul class="rating list-unstyled mb-15">
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                            </ul>
-                            <h3 class="fs-24"><a href="{% url 'product-detail' %}" class="text-title link-hover-primary">Box With Bow</a></h3>
-                            <span class="product-price fs-xxl-18 d-block">₹60.00</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-6">
-                        <div class="product-card style-four position-relative text-center img-hover-zoom round-20 mb-30 cursor-pointer" onclick="window.location.href='{% url 'products' %}';">
-                            <div class="product-img round-15">
-                                <img src="{% static 'img/products/gift/product-13.jpg' %}" alt="Image" class="round-15">
-                            </div>
-                            <ul class="rating list-unstyled mb-15">
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                            </ul>
-                            <h3 class="fs-24"><a href="{% url 'product-detail' %}" class="text-title link-hover-primary">Box With Bottle</a></h3>
-                            <span class="product-price fs-xxl-18 d-block">₹40.00</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-6">
-                        <div class="product-card style-four position-relative text-center img-hover-zoom round-20 mb-30 cursor-pointer" onclick="window.location.href='{% url 'products' %}';">
-                            <div class="product-img round-15">
-                                <img src="{% static 'img/products/gift/product-10.jpg' %}" alt="Image" class="round-15">
-                            </div>
-                            <ul class="rating list-unstyled mb-15">
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                            </ul>
-                            <h3 class="fs-24"><a href="{% url 'product-detail' %}" class="text-title link-hover-primary">Box With Card</a></h3>
-                            <span class="product-price fs-xxl-18 d-block">₹4.85</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-6">
-                        <div class="product-card style-four position-relative text-center img-hover-zoom round-20 mb-30 cursor-pointer" onclick="window.location.href='{% url 'products' %}';">
-                            <div class="product-img round-15">
-                                <img src="{% static 'img/products/gift/product-11.jpg' %}" alt="Image" class="round-15">
-                            </div>
-                            <ul class="rating list-unstyled mb-15">
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                                <li><img src="{% static 'img/icons/star-1.svg' %}" alt="Icon"></li>
-                            </ul>
-                            <h3 class="fs-24"><a href="{% url 'product-detail' %}" class="text-title link-hover-primary">Christmas Gift</a></h3>
-                            <span class="product-price fs-xxl-18 d-block">₹65.00</span>
-                        </div>
-                    </div>
-                    <div class="col-xl-12 text-center">
-                        <a href="{% url 'products' 'festival-decorations' %}" class="btn style-two position-relative z-1 round-10">View All</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Product Section End -->
 {% endblock %}
