@@ -1184,6 +1184,24 @@ body {
     transform: rotate(360deg) translateY(-200%);
   }
 }
+.whatsapp-chat {
+  position: fixed;
+  left: 30px;
+  bottom: 30px;
+  height: 46px;
+  width: 46px;
+  cursor: pointer;
+  z-index: 9;
+  visibility: hidden;
+  transform: translateY(15px);
+  transition: all 200ms linear;
+}
+@media only screen and (max-width: 767px) {
+  .whatsapp-chat {
+    left: 10px;
+    bottom: 15px;
+  }
+}
 /*--------------------------------------------------
     Back To Top CSS
 ---------------------------------------------------*/
