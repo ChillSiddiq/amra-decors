@@ -6,14 +6,18 @@
 {% block content %}
 			<!-- Hero Section Start -->
             <div class="slideshow-container">
-                <img src="{% static 'img/bottom-zigzag-shape.svg' %}" alt="Shape" class="bottom-shape position-absolute bottom-0 start-0 w-100 z-1">
+                <!-- <img src="{% static 'img/bottom-zigzag-shape.svg' %}" alt="Shape" class="bottom-shape position-absolute bottom-0 start-0 w-100 z-1"> -->
                 {% for slide in banner.slides.all %}
                 {% if slide.type == 'image' %}
                 <div class="single-slide">
                     <div class="image-container">
-                        <a href="{{ slide.link }}">
-                            <img src="{{ slide.image.url }}" alt="Full Image Slide" class="img-fluid w-100" data-cue="slideInUp">
-                        </a>
+                        {% if slide.link %}
+                            <a href="{{ slide.link }}">
+                                <img src="{{ slide.image.url }}" alt="Full Image Slide" class="" data-cue="slideInUp">
+                            </a>
+                        {% else %}
+                            <img src="{{ slide.image.url }}" alt="Full Image Slide" class="" data-cue="slideInUp">
+                        {% endif %}
                     </div>
                 </div>
                 {% elif slide.type == 'video' %}
@@ -39,9 +43,11 @@
                                 <h6 class="section-subtile fs-xxl-20 fw-light text_primary mb-6">{{ slide.subtitle }}</h6>
                                 <h1>{{ slide.title }}</h1>
                                 <p class="fs-xxl-18 pe-xxl-5 d-none d-md-block">{{ slide.description }}</p>
-                                <div class="btn-wrap d-flex flex-wrap align-items-center">
-                                    <a href="{{ slide.link }}" class="btn style-two position-relative z-1 round-10">{{ slide.button_text }}</a>
-                                </div>
+                                {% if slide.link %}
+                                    <div class="btn-wrap d-flex flex-wrap align-items-center">
+                                        <a href="{{ slide.link }}" class="btn style-two position-relative z-1 round-10">{{ slide.button_text }}</a>
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
                         <div class="col-xl-4 col-lg-4 col-md-6 mb-sm-30 d-none d-md-block">
@@ -65,8 +71,20 @@
             <div class="pb-120"></div>
 
             <!-- Product Section Start -->
-            <section class="product-area">
-                <div class="container style-one pb-90">
+            <section class="product-area position-relative z-1">
+                <div style="
+                    position: absolute;
+                    bottom: 0px;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-image: url('{% static 'img/christmas-tree-bg.png' %}');
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    transform: rotate(180deg);
+                    z-index: -1;">
+                </div>
+                <div class="container style-one pb-120">
                     <h2 class="section-title style-one fw-normal text-title text-center mb-45">New Arrivals</h2>
                     <div class="product-slider-one swiper">
                         <div class="swiper-wrapper">
@@ -86,7 +104,7 @@
             <!-- Product Section End -->
 
             <!-- Featured Product Start -->
-            <section class="featured-product-area pb-90">
+            <!-- <section class="featured-product-area pt-90 pb-90">
                 <div class="container style-one">
                     <div class="row">
                         <div class="col-12 col-md-6">
@@ -119,13 +137,25 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> -->
             <!-- Featured Product End -->
             
             <!-- Product Section Start -->
             {% for category in categories %}
             {% if category.ordered_products and category.parent == None %}
-            <section class="product-area">
+            <section class="product-area position-relative z-1 pt-120">
+                <div style="
+                    position: absolute;
+                    bottom: 0px;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-image: url('{% static 'img/christmas-tree-bg.png' %}');
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    transform: rotate(180deg);
+                    z-index: -1;">
+                </div>
                 <div class="container style-one pb-120">
                     <h2 class="section-title style-one fw-normal text-title text-center mb-45">{{ category.name }}</h2>
                     <div class="product-slider-one swiper">

@@ -26,7 +26,7 @@
   .pt-50 {
     padding-top: 30px;
   }
-  .pt-100 {
+  .pt-90 {
     padding-top: 30px;
   }
   .pt-95 {
@@ -916,7 +916,7 @@
   .pt-50 {
     padding-top: 30px;
   }
-  .pt-100 {
+  .pt-90 {
     padding-top: 30px;
   }
   .pt-95 {
@@ -1034,7 +1034,7 @@
   }
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
-  .pt-100 {
+  .pt-90 {
     padding-top: 70px;
   }
   .pt-95 {
