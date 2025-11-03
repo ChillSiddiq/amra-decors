@@ -131,7 +131,7 @@ class SlideAdmin(admin.ModelAdmin):
 
 admin.site.register(Slide, SlideAdmin)
 
-# admin.site.register(Banner, BannerAdmin)
+admin.site.register(Banner, BannerAdmin)
 admin.site.register(Categories, CategoriesAdmin)
 # admin.site.register(Coupons, CouponsAdmin)
 admin.site.register(Roles, RolesAdmin)
