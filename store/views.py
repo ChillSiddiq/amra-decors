@@ -5,6 +5,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 # Create your views here.
 from .models import Categories, Coupons, Roles, Profile, Products, Banner
 
+def get_active_categories():
+    return Categories.objects.filter(active=True)
+
 def home_view(request):
     all_products = Products.objects.filter(active=True).order_by('-id')
     categories = Categories.objects.filter(active=True).prefetch_related(
@@ -23,7 +26,7 @@ def home_view(request):
     return render(request, 'home.html', page_data)
 
 def about_view(request):
-    categories = Categories.objects.filter(active=True)
+    categories = get_active_categories()
 
     page_data = {
         'page_name': 'about',
@@ -33,7 +36,7 @@ def about_view(request):
     return render(request, 'about.html', page_data)
 
 def services_view(request):
-    categories = Categories.objects.filter(active=True)
+    categories = get_active_categories()
 
     page_data = {
         'page_name': 'services',
@@ -55,7 +58,7 @@ def products_view(request, slug=''):
         products = Products.objects.filter(active=True).order_by('-id')
         page_title = 'Products | Amra Decorations'
     
-    categories = Categories.objects.filter(active=True)
+    categories = get_active_categories()
 
     page_data = {
         'page_name': 'products',
@@ -67,7 +70,7 @@ def products_view(request, slug=''):
     return render(request, 'products.html', page_data)
 
 def product_detail_view(request, id=''):
-    categories = Categories.objects.filter(active=True)
+    categories = get_active_categories()
 
     if id:
         product = Products.objects.get(id=id)
@@ -85,7 +88,7 @@ def product_detail_view(request, id=''):
     return render(request, 'product-detail.html', page_data)
 
 def contact_view(request):
-    categories = Categories.objects.filter(active=True)
+    categories = get_active_categories()
 
     page_data = {
         'page_name': 'contact',
@@ -96,7 +99,7 @@ def contact_view(request):
     return render(request, 'contact.html', page_data)
 
 def login_view(request):
-    categories = Categories.objects.filter(active=True)
+    categories = get_active_categories()
 
     page_data = {
         'page_name': 'login',
@@ -107,7 +110,7 @@ def login_view(request):
     return render(request, 'login.html', page_data)
 
 def custom_404_view(request, exception):
-    categories = Categories.objects.filter(active=True)
+    categories = get_active_categories()
     
     page_data = {
         'page_name': '404',
