@@ -6,9 +6,8 @@
 {% block content %}
 			<!-- Hero Section Start -->
             <div class="slideshow-container">
-                <!-- <img src="{% static 'img/bottom-zigzag-shape.svg' %}" alt="Shape" class="bottom-shape position-absolute bottom-0 start-0 w-100 z-1"> -->
                 {% for slide in banner.slides.all %}
-                {% if slide.type == 'image' %}
+                {% if slide.slide_type == 'image' %}
                 <div class="single-slide">
                     <div class="image-container">
                         {% if slide.link %}
@@ -20,7 +19,7 @@
                         {% endif %}
                     </div>
                 </div>
-                {% elif slide.type == 'video' %}
+                {% elif slide.slide_type == 'video' %}
                 <div class="single-slide">
                     <div class="video-container position-relative w-100" style="padding-top: 56.25%;" data-cue="fadeIn">
                         <video 
@@ -35,7 +34,7 @@
                         </video>
                     </div>
                 </div>
-                {% elif slide.type == 'default' %}
+                {% elif slide.slide_type == 'default' %}
                 <div class="single-slide">
                     <div class="row align-items-center pe-5 ps-5">
                         <div class="col-xl-8 col-lg-8 col-12 pe-xxl-5">
@@ -84,6 +83,7 @@
                     transform: rotate(180deg);
                     z-index: -1;">
                 </div>
+                {% if all_products %}
                 <div class="container style-one pb-120">
                     <h2 class="section-title style-one fw-normal text-title text-center mb-45">New Arrivals</h2>
                     <div class="product-slider-one swiper">
@@ -100,6 +100,7 @@
                         <a href="{% url 'products' %}" class="btn style-two position-relative z-1 round-10">View All</a>
                     </div>
                 </div>
+                {% endif %}
             </section>
             <!-- Product Section End -->
 

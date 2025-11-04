@@ -1,4 +1,5 @@
 from django import forms
+from django.db import models
 from django.contrib import admin
 
 # Register your models here.
@@ -103,33 +104,43 @@ class BannerAdmin(admin.ModelAdmin):
     inlines = [SlideInline]
 
 class SlideAdmin(admin.ModelAdmin):
-    list_display = ('title', 'type', 'order', 'created_at')
-    search_fields = ('title', 'type',)
+    list_display = ('title', 'slide_type', 'order', 'created_at')
+    search_fields = ('title', 'slide_type')
+
+    formfield_overrides = {
+        models.ImageField: {'label': 'Image (Max 1MB)'},
+        models.FileField: {'label': 'Video (Max 5MB)'},
+    }
 
     def get_fieldsets(self, request, obj=None):
-        common_fields = ('type', 'title', 'order')
+        common_fields = ('slide_type', 'title', 'order')
 
         if obj:
-            if obj.type == 'default':
+            if obj.slide_type == 'default':
                 return (
                     (None, {'fields': common_fields + (
-                        'title', 'subtitle', 'description', 'button_text', 'link', 'image'
+                        'subtitle', 'description', 'button_text', 'link', 'image'
                     )}),
                 )
-            elif obj.type == 'image':
-                return ((None, {'fields': common_fields + ('image', 'link')}),)
-            elif obj.type == 'video':
-                return ((None, {'fields': common_fields + ('video',)}),)
+            elif obj.slide_type == 'image':
+                return (
+                    (None, {'fields': common_fields + ('image', 'link')}),
+                )
+            elif obj.slide_type == 'video':
+                return (
+                    (None, {'fields': common_fields + ('video',)}),
+                )
 
-        # Fallback during creation: only show 'type'
-        return ((None, {'fields': ('type', 'title', 'order')}),)
-    
+        # Fallback during creation
+        return (
+            (None, {'fields': ('slide_type', 'title', 'order')}),
+        )
+
     def save_model(self, request, obj, form, change):
         if not obj.banner_id:
             obj.banner_id = 1
         super().save_model(request, obj, form, change)
 
-admin.site.register(Slide, SlideAdmin)
 
 admin.site.register(Banner, BannerAdmin)
 admin.site.register(Categories, CategoriesAdmin)
@@ -137,3 +148,4 @@ admin.site.register(Categories, CategoriesAdmin)
 admin.site.register(Roles, RolesAdmin)
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Products, ProductsAdmin)
+admin.site.register(Slide, SlideAdmin)

@@ -1,8 +1,11 @@
+import os
+import uuid
 from django.db import models
 from datetime import timedelta
 from django.utils import timezone
 from django.utils.text import slugify
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 
 from ckeditor.fields import RichTextField
     
@@ -156,16 +159,32 @@ class Slide(models.Model):
         ('image', 'Image'),
         ('video', 'Video'),
     ]
+    def get_unique_filename(instance, filename):
+        # Generate a unique filename for uploaded files
+        ext = os.path.splitext(filename)[1]
+        unique_name = f"{uuid.uuid4().hex}{ext}"
+        return unique_name
+    
+    def validate_image_size(file):
+        max_size_mb = 1
+        if file.size > max_size_mb * 1024 * 1024:
+            raise ValidationError(f"Maximum file size is {max_size_mb}MB")
+    
+    def validate_video_size(file):
+        max_size_mb = 5
+        if file.size > max_size_mb * 1024 * 1024:
+            raise ValidationError(f"Maximum file size is {max_size_mb}MB")
+    
     banner = models.ForeignKey(Banner, related_name='slides', on_delete=models.CASCADE)
-    type = models.CharField(max_length=255, choices=TYPES, default="default")
+    slide_type = models.CharField(max_length=255, choices=TYPES, default="default")
     title = models.CharField(max_length=255, blank=True, null=True)
     subtitle = models.CharField(max_length=255, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     button_text = models.CharField(max_length=255, blank=True, null=True)
     link = models.CharField(max_length=255, blank=True, null=True)
     order = models.PositiveIntegerField(default=0)  # To order the slides
-    image = models.ImageField(upload_to='slides/', blank=True, null=True)  # Image field
-    video = models.FileField(upload_to='videos/', blank=True, null=True)
+    image = models.ImageField(upload_to=get_unique_filename, blank=True, null=True, validators=[validate_image_size])  # Image field
+    video = models.FileField(upload_to=get_unique_filename, blank=True, null=True, validators=[validate_video_size]) # Video field
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

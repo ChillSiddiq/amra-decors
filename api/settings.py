@@ -176,4 +176,12 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",
     "https://amra-decors.vercel.app",
     "https://amradecoration.com",
+    "https://amra-decors-seven.vercel.app",
 ]
+
+DEFAULT_FILE_STORAGE = 'store.supabase_storage.SupabaseStorage'
+
+# Supabase Config
+SUPABASE_URL = 'https://cdsmhmrsgipalidkxevg.supabase.co'
+SUPABASE_API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNkc21obXJzZ2lwYWxpZGt4ZXZnIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2MjE1MDU4MCwiZXhwIjoyMDc3NzI2NTgwfQ.Pdzcf-_nh5N8CZE15KYIGBt3RRWOVaq6TFZIf5wh634'
+SUPABASE_BUCKET_NAME = 'Amra Decors Website'
