@@ -1,0 +1,6 @@
+venv/
+media/
+assets/
+static/
+__pycache__/
+*.pyc
